@@ -24,19 +24,25 @@ while True:
             record = input('Введите запись: ')
             diary.write(f"[{now_f}] {record}\n")
     elif num == 2:
-        with open('diary.txt', encoding='utf-8') as diary:
-            file = diary.read()
-            print(file)
+        try:
+            with open('diary.txt', encoding='utf-8') as diary:
+                file = diary.read()
+                print(file)
+        except FileNotFoundError:
+            print('Ошибка! Файл не найден')
     elif num == 3:
-        with open('diary.txt', encoding='utf-8') as diary:
-            flag = False
-            data = input("Введите дату (ГГГГ-ММ-ДД): ")
-            for line in diary:
-                if line.startswith(f'[{data}'):
-                    print(line.strip())
-                    flag = True
-            
-            if not flag:
-                print("Записей на эту дату нет")
+        try:
+            with open('diary.txt', encoding='utf-8') as diary:
+                flag = False
+                data = input("Введите дату (ГГГГ-ММ-ДД): ")
+                for line in diary:
+                    if line.startswith(f'[{data}'):
+                        print(line.strip())
+                        flag = True
+                
+                if not flag:
+                    print("Записей на эту дату нет")
+        except FileNotFoundError:
+            print('Ошибка! Файл не найден')
     elif num == 4:
         break
