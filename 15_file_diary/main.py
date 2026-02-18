@@ -10,6 +10,10 @@ while True:
             now = datetime.now()
             now_f = now.strftime('%Y-%m-%d %H:%M')
             record = input('Введите запись: ')
-            diary.write(f"[{now_f}] {record}")
+            diary.write(f"[{now_f}] {record}\n")
+    elif num == 2:
+        with open('diary.txt', encoding='utf-8') as diary:
+            file = diary.read()
+            print(file)
     elif num == 4:
         break
