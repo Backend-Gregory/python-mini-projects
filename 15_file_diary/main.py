@@ -11,6 +11,7 @@ def get_choice():
             print("Ошибка! Введите число, а не текст")
 
 while True:
+    print()
     print('1. Записать новую запись')
     print('2. Показать все записи')
     print('3. Найти запись по дате')
@@ -23,6 +24,7 @@ while True:
             now_f = now.strftime('%Y-%m-%d %H:%M')
             record = input('Введите запись: ')
             diary.write(f"[{now_f}] {record}\n")
+            print('Запись сохранена!')
     elif num == 2:
         try:
             with open('diary.txt', encoding='utf-8') as diary:
