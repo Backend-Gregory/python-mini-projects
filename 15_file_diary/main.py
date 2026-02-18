@@ -15,5 +15,16 @@ while True:
         with open('diary.txt', encoding='utf-8') as diary:
             file = diary.read()
             print(file)
+    elif num == 3:
+        with open('diary.txt', encoding='utf-8') as diary:
+            flag = False
+            data = input("Введите дату (ГГГГ-ММ-ДД): ")
+            for line in diary:
+                if line.startswith(f'[{data}'):
+                    print(line.strip())
+                    flag = True
+            
+            if not flag:
+                print("Записей на эту дату нет")
     elif num == 4:
         break
