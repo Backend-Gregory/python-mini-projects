@@ -3,6 +3,21 @@ if os.path.exists('auth.txt'):
     print('=' * 45)
     print('ВХОД В СИСТЕМУ')
     print('=' * 45)
+    with open('auth.txt', encoding='utf-8') as auth:
+        while True:
+            login = input('Логин: ')
+            password = input('Пароль: ')
+            status = True
+            auth.seek(0)
+            if login != auth.readline().strip() or \
+            password != auth.readline().strip():
+                status = False
+            if status:
+                print('Добро пожаловать!')
+                break
+            else:
+                print('Неверно! Попробуй еще раз.')
+            
 else:
     print('=' * 45)
     print('ДОБРО ПОЖАЛОВАТЬ!')
