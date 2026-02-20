@@ -1,22 +1,33 @@
 import os
+
 if os.path.exists('auth.txt'):
     print('=' * 45)
     print('ВХОД В СИСТЕМУ')
     print('=' * 45)
-    with open('auth.txt', encoding='utf-8') as auth:
-        while True:
-            login = input('Логин: ')
-            password = input('Пароль: ')
-            status = True
-            auth.seek(0)
-            if login != auth.readline().strip() or \
-            password != auth.readline().strip():
-                status = False
-            if status:
-                print('Добро пожаловать!')
-                break
-            else:
-                print('Неверно! Попробуй еще раз.')
+    if os.path.exists('status.txt'):
+        print('Вы заблокированы! Попыток не осталось.')
+    else:
+        with open('auth.txt', encoding='utf-8') as auth:
+            attempts = 3
+            while True:
+                login = input('Логин: ')
+                password = input('Пароль: ')
+                status = None
+                auth.seek(0)
+                if login == auth.readline().strip() and \
+                password == auth.readline().strip():
+                    status = True
+                    print('Добро пожаловать!')
+                    break
+                else:
+                    if attempts > 0:
+                        status = False
+                        print(f'Неверно! Осталось {attempts} попыток.')
+                        attempts -= 1
+                    else:
+                        with open('status.txt', 'w', encoding='utf-8'):
+                            print('Вы заблокированы! Попыток больше не осталось.')
+                            break
             
 else:
     print('=' * 45)
