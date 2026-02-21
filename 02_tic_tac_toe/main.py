@@ -1,4 +1,3 @@
-current_player = 'X'
 
 def get_move(board, player):
     while True:
@@ -6,7 +5,7 @@ def get_move(board, player):
             row = int(input(f'Ход {player}. Введите строку (0-2)'))
             col = int(input(f'Ход {player}. Введите столбец (0-2)'))
             if 0 <= row <= 2 and 0 <= col <= 2:
-                if board[row][col] == '.':
+                if board[row][col] == ' ':
                     return row, col
                 else:
                     print('Клетка занята')
@@ -41,34 +40,42 @@ def check_winner(board):
 
     for combo in win_combinations:
         a, b, c = combo
-        if board[a[0]][a[1]] == board[b[0]][b[1]] == board[c[0]][c[1]] != '.':
+        if board[a[0]][a[1]] == board[b[0]][b[1]] == board[c[0]][c[1]] != ' ':
             return board[a[0]][a[1]]
         
     return None
 
 def is_draw(board):
     for row in board:
-        if '.' in row:
+        if ' ' in row:
             return False
     return True
 
-
-pole = [['.' for _ in range(3)] for _ in range(3)]
-
-print_pole(pole)
-
 while True:
-    row, col = get_move(pole, current_player)
-    pole[row][col] = current_player
+    pole = [[' ' for _ in range(3)] for _ in range(3)]
+    current_player = 'X'
     print_pole(pole)
-    
-    winner = check_winner(pole)
-    if winner != None:
-        print(f'Победитель {winner}')
-        break
-    elif is_draw(pole):
-        print("Ничья!")
-        break
+    while True:
+        row, col = get_move(pole, current_player)
+        pole[row][col] = current_player
+        print_pole(pole)
+        
+        winner = check_winner(pole)
+        if winner != None:
+            print(f'Победитель {winner}')
+            break
+        elif is_draw(pole):
+            print("Ничья!")
+            break
 
-    current_player = 'O' if current_player == 'X' else 'X'
+        current_player = 'O' if current_player == 'X' else 'X'
+
+    while True:
+        num = input('Хотите сыграть еще раз? (да/нет)').lower()
+        if num == 'да':
+            break
+        elif num == 'нет':
+            exit()
+        else:
+            print('Введите "да" или "нет"')
     
