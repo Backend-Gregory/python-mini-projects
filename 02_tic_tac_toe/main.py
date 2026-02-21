@@ -46,7 +46,11 @@ def check_winner(board):
         
     return None
 
-
+def is_draw(board):
+    for row in board:
+        if '.' in row:
+            return False
+    return True
 
 
 pole = [['.' for _ in range(3)] for _ in range(3)]
@@ -57,10 +61,14 @@ while True:
     row, col = get_move(pole, current_player)
     pole[row][col] = current_player
     print_pole(pole)
-    current_player = 'O' if current_player == 'X' else 'X'
     
     winner = check_winner(pole)
     if winner != None:
         print(f'Победитель {winner}')
         break
+    elif is_draw(pole):
+        print("Ничья!")
+        break
+
+    current_player = 'O' if current_player == 'X' else 'X'
     
