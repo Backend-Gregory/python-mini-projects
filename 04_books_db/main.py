@@ -2,3 +2,8 @@ LINE_WIDTH = 45
 print("=" * LINE_WIDTH)
 print('База данных "Книги"')
 print('=' * LINE_WIDTH)
+print()
+print('1. Добавить книгу')
+print('2. Поиск по автору')
+print('3. Сортировка по году')
+print('4. Показать все')
