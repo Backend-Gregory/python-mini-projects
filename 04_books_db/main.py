@@ -1,5 +1,6 @@
 LINE_WIDTH = 45
 LIBRARY = 'library.txt'
+ERROR_FILE = 'Ошибка! файл не найден.'
 
 def valid_year(text):
     while True:
@@ -15,21 +16,29 @@ def add_book(book, author, year):
         library.write(f'{book}|{author}|{year}\n')
 
 def search_by_author(author):
-    with open(LIBRARY, encoding='utf-8') as library:
-        res = []
-        for i in library:
-            l = tuple(i.strip().split('|'))
-            if l[1] == author:
-                res.append((l[0], l[2]))
-        return res
+    try:
+        with open(LIBRARY, encoding='utf-8') as library:
+            res = []
+            for i in library:
+                l = tuple(i.strip().split('|'))
+                if l[1] == author:
+                    res.append((l[0], l[2]))
+            return res
+    except FileNotFoundError:
+        print(ERROR_FILE)
+        return []
     
 def get_all_books():
     books = []
-    with open(LIBRARY, encoding='utf-8') as library:
-        for line in library:
-            parts = tuple(line.strip().split('|'))
-            books.append((parts[0], parts[1], int(parts[2])))
-        return books
+    try:
+        with open(LIBRARY, encoding='utf-8') as library:
+            for line in library:
+                parts = tuple(line.strip().split('|'))
+                books.append((parts[0], parts[1], int(parts[2])))
+            return books
+    except FileNotFoundError:
+        print(ERROR_FILE)
+        return []
 
 
 print("=" * LINE_WIDTH)
