@@ -53,8 +53,9 @@ while True:
     print('2. Поиск по автору')
     print('3. Сортировка по году')
     print('4. Показать все')
+    print('5. Выход')
 
-    num = valid_number('Выбери действие (1-4): ', 1, 4)
+    num = valid_number('Выбери действие (1-5): ', 1, 5)
     if num == 1:
         book = input('Название книги: ')
         author = input('Автор книги: ').lower()
@@ -71,6 +72,8 @@ while True:
                 print(f"{i[0]} ({i[1]} год)")
         else:
             print(f'Книги автора {author} не найдены.')
+    elif num == 5:
+        break
     else:
         books = get_all_books()
         if num == 3:
@@ -79,6 +82,3 @@ while True:
             print("Все книги сортированые по году:")
         for book in books:
             print(f"{book[0]} - {book[1]} ({book[2]} год)")
-    inp = input('Хотите продолжить? (да/нет)').lower()
-    if inp == 'нет':
-        break
