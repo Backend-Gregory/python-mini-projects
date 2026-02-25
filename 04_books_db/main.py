@@ -13,6 +13,14 @@ def search_by_author(author):
             if l[1] == author:
                 res.append((l[0], l[2]))
         return res
+    
+def print_book():
+    books = []
+    with open(LIBRARY, encoding='utf-8') as library:
+        for line in library:
+            parts = tuple(line.strip().split('|'))
+            books.append((parts[0], parts[1], int(parts[2])))
+        return books
 
 
 print("=" * LINE_WIDTH)
@@ -40,3 +48,10 @@ elif num == 2:
             print(f"{i[0]} ({i[1]} год)")
     else:
         print(f'Книги автора {author} не найдены.')
+elif num == 3:    
+    books = print_book()
+    books_sorted = sorted(books, key=lambda x: x[2])
+    print()
+    print("Все книги сортированые по году:")
+    for book in books_sorted:
+        print(f"{book[0]} - {book[1]} ({book[2]} год)")
