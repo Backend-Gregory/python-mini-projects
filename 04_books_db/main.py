@@ -14,7 +14,7 @@ def search_by_author(author):
                 res.append((l[0], l[2]))
         return res
     
-def print_book():
+def get_all_books():
     books = []
     with open(LIBRARY, encoding='utf-8') as library:
         for line in library:
@@ -48,10 +48,11 @@ elif num == 2:
             print(f"{i[0]} ({i[1]} год)")
     else:
         print(f'Книги автора {author} не найдены.')
-elif num == 3:    
-    books = print_book()
-    books_sorted = sorted(books, key=lambda x: x[2])
-    print()
-    print("Все книги сортированые по году:")
-    for book in books_sorted:
+else:
+    books = get_all_books()
+    if num == 3:
+        books = sorted(books, key=lambda x: x[2])
+        print()
+        print("Все книги сортированые по году:")
+    for book in books:
         print(f"{book[0]} - {book[1]} ({book[2]} год)")
