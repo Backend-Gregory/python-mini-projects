@@ -11,8 +11,9 @@ def search_by_author(author):
         for i in library:
             l = tuple(i.strip().split('|'))
             if l[1] == author:
-                res.append(l[0])
+                res.append((l[0], l[2]))
         return res
+
 
 print("=" * LINE_WIDTH)
 print('База данных "Книги"')
@@ -35,6 +36,7 @@ elif num == 2:
     if books:
         print()
         print(f'Книги автора {author}:')
-        print(*books, sep='\n')
+        for i in books:
+            print(f"{i[0]} ({i[1]} год)")
     else:
         print(f'Книги автора {author} не найдены.')
