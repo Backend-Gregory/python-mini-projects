@@ -2,11 +2,14 @@ LINE_WIDTH = 45
 LIBRARY = 'library.txt'
 ERROR_FILE = 'Ошибка! файл не найден.'
 
-def valid_year(text):
+def valid_number(text, num1, num2):
     while True:
         try:
             value = int(input(text))
-            return value
+            if num1 <= value <= num2:
+                return value
+            else:
+                print(f'Введите число от {num1} до {num2}')
         except ValueError:
             print(f'Введите год (числом).')
 
@@ -51,11 +54,11 @@ while True:
     print('3. Сортировка по году')
     print('4. Показать все')
 
-    num = int(input('Выбери действие (1-4): '))
+    num = valid_number('Выбери действие (1-4): ', 1, 4)
     if num == 1:
         book = input('Название книги: ')
         author = input('Автор книги: ').lower()
-        year = valid_year('Год выпуска: ')
+        year = valid_number('Год выпуска: ', 0, 2026)
         add_book(book, author, year)
         print('✅ Книга добавлена!')
     elif num == 2:
