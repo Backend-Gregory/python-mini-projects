@@ -24,7 +24,7 @@
 | ✅ | **Система аутентификации** | bool, NoneType | [01_auth_system](01_auth_system) |
 | ✅ | **Крестики-нолики** | матрицы, проверка победы | [02_tic_tac_toe](02_tic_tac_toe) |
 | 3 | **Генератор паролей** | random, string | [03_password_generator](03_password_generator) |
-| 4 | **База данных "Книги"** | кортежи | [04_books_db](04_books_db) |
+| ✅ | **База данных "Книги"** | кортежи | [04_books_db](04_books_db) |
 | 5 | **Система "Оценки студентов"** | словари + кортежи | [05_student_grades](05_student_grades) |
 | 6 | **Анализ текста** | множества | [06_text_analyzer](06_text_analyzer) |
 | 7 | **Поиск друзей в соцсети** | множества + словари | [07_friends_network](07_friends_network) |
