@@ -1,6 +1,15 @@
 LINE_WIDTH = 45
 LIBRARY = 'library.txt'
 
+def valid_year(text):
+    while True:
+        try:
+            value = int(input(text))
+            return value
+        except ValueError:
+            print(f'Введите год (числом).')
+
+
 def add_book(book, author, year):
     with open(LIBRARY, 'a', encoding='utf-8') as library:
         library.write(f'{book}|{author}|{year}\n')
@@ -36,12 +45,12 @@ while True:
     num = int(input('Выбери действие (1-4): '))
     if num == 1:
         book = input('Название книги: ')
-        author = input('Автор книги: ')
-        year = input('Год выпуска: ')
+        author = input('Автор книги: ').lower()
+        year = valid_year('Год выпуска: ')
         add_book(book, author, year)
         print('✅ Книга добавлена!')
     elif num == 2:
-        author = input('Автор книги: ')
+        author = input('Автор книги: ').lower()
         books = search_by_author(author)
         if books:
             print()
