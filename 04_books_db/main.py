@@ -5,6 +5,15 @@ def add_book(book, author, year):
     with open(LIBRARY, 'a', encoding='utf-8') as library:
         library.write(f'{book}|{author}|{year}\n')
 
+def search_by_author(author):
+    with open(LIBRARY, encoding='utf-8') as library:
+        res = []
+        for i in library:
+            l = tuple(i.strip().split('|'))
+            if l[1] == author:
+                res.append(l[0])
+        return res
+
 print("=" * LINE_WIDTH)
 print('База данных "Книги"')
 print('=' * LINE_WIDTH)
@@ -20,3 +29,12 @@ if num == 1:
     year = input('Год выпуска: ')
     add_book(book, author, year)
     print('✅ Книга добавлена!')
+elif num == 2:
+    author = input('Автор книги: ')
+    books = search_by_author(author)
+    if books:
+        print()
+        print(f'Книги автора {author}:')
+        print(*books, sep='\n')
+    else:
+        print(f'Книги автора {author} не найдены.')
