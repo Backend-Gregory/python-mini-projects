@@ -16,8 +16,8 @@ def count_pred(text):
     count_pred = text.count('.') + text.count('!') + text.count('?')
     return count_pred
 
-def print_res(count_pred, count_word, count_sim, unique_word_text):
-    print('Информация для 1 текста:')
+def print_res(count_pred, count_word, count_sim, unique_word_text, text_num):
+    print(f'Информация для {text_num} текста:')
     print(f'Всего предложений: {count_pred}')
     print(f'Всего слов: {count_word}')
     print(f'Всего символов: {count_sim}')
@@ -32,6 +32,10 @@ print()
 text1 = input('Введите первый текст:\n')
 print()
 text2 = input('Введите второй текст:\n')
+
+if not text1.strip() or not text2.strip():
+    print('Внимание! Один из текстов пуст.')
+    exit()
 
 set_text1 = clean(text1)
 set_text2 = clean(text2)
@@ -57,5 +61,7 @@ if unique_word:
 else:
     print('Общих слов не найдено.')
 
-print_res(count_pred_text1, count_word1, count_sim1, unique_word_text1)
-print_res(count_pred_text2, count_word2, count_sim2, unique_word_text2)
+print()
+print_res(count_pred_text1, count_word1, count_sim1, unique_word_text1, '1')
+print()
+print_res(count_pred_text2, count_word2, count_sim2, unique_word_text2, '2')
