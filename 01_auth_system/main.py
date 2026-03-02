@@ -59,8 +59,17 @@ else:
     print('Необходимо зарегистрироваться.')
     print()
     
-    with open(AUTH_FILE, 'a', encoding='utf-8') as auth:
-        login = input('Придумайте логин: ')
-        password = input('Придумайте пароль: ')
-        auth.write(login + '\n')
-        auth.write(password)
+    with open(AUTH_FILE, 'w', encoding='utf-8') as auth:
+        while True:
+            login = input('Придумайте логин: ')
+            password = input('Придумайте пароль: ')
+            if not login or not password:
+                print('Логин и пароль не могут быть пустыми!')
+            elif login != login.strip() or password != password.strip():
+                print('В конце и начале пароля и логина не должно быть пробелов!')
+            elif len(login) > 50 or len(password) > 50:
+                print('Логин и пароль могут содержать не более 50 символов!')
+            else:
+                auth.write(login + '\n')
+                auth.write(password)
+                break
