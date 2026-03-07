@@ -19,7 +19,7 @@ def print_students(grades):
     for name in grades:
         print(f'{name}:')
         for lesson in grades[name]:
-            print(f'{lesson}: {grades[name][lesson]}')
+            print(f'   {lesson}: {','.join(map(str, grades[name][lesson]))}')
 
 if os.path.exists(FILE):
     with open(FILE, encoding='utf-8') as f:
@@ -38,6 +38,7 @@ print('4. Общий средний балл студента')
 print('5. Рейтинг студентов')
 print('6. Выход')
 num = int(input('Выберите действие (1-6): '))
+
 if num == 1:
     add_grade(grades)
 
