@@ -15,11 +15,18 @@ def add_grade(grades):
         json.dump(grades, f, ensure_ascii=False, indent=2)
     print('Оценка сохранена.')
 
-def print_students(grades):
+def print_students(grades, e=2):
     for name in grades:
         print(f'{name}:')
         for lesson in grades[name]:
-            print(f'   {lesson}: {','.join(map(str, grades[name][lesson]))}')
+            grade = grades[name][lesson]
+            gr = ','.join(map(str, grade))
+            average = sum(grade) / len(grade)
+            print(f'   {lesson}:', end=' ')
+            if e == 2:
+                print(gr, end='')
+            print(f' [{average}]')
+            
 
 if os.path.exists(FILE):
     with open(FILE, encoding='utf-8') as f:
@@ -44,3 +51,6 @@ if num == 1:
 
 elif num == 2:
     print_students(grades)
+
+elif num == 3:
+    print_students(grades, 3)
