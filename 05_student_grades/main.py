@@ -30,6 +30,7 @@ def add_grade(grades):
 
 def print_students(grades, e=2):
     for name in grades:
+        print()
         print(f'{name}:')
         for lesson in grades[name]:
             grade = grades[name][lesson]
@@ -55,8 +56,9 @@ def get_student_average(grades, student):
         return None
 
 def average_score(grades):
-    student = input('Средний балл студента: ')
+    student = input('Имя студента: ')
     avg = get_student_average(grades, student)
+    print()
     if avg is None:
         print(f'Студент {student} или нет оценок.')
     else:
@@ -71,7 +73,8 @@ def student_rating(grades):
         if avg is not None:
             rating.append((student, avg))
     rating.sort(key=lambda x: x[1], reverse=True)
-    print('РЕЙТИНГ СТУДЕНТОВ')
+    print()
+    print('РЕЙТИНГ СТУДЕНТОВ:')
     for place, (student, avg) in enumerate(rating, 1):
         print(f'{place}. {student}: {avg:.2f}')
 
