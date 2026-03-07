@@ -26,7 +26,21 @@ def print_students(grades, e=2):
             if e == 2:
                 print(gr, end='')
             print(f' [{average}]')
-            
+
+def average_score(grades):
+    student = input('Средний балл студента: ')
+    count = 0
+    sm = 0
+    if student in grades:
+        name = grades[student]
+        for lesson in name:
+            grade = grades[student][lesson]
+            count += len(grade)
+            sm += sum(grade)
+        average = sm / count
+        print(f'Ср. балл студена {student}: {average}')
+    else:
+        print(f'Студента {student} найти не удалось.')
 
 if os.path.exists(FILE):
     with open(FILE, encoding='utf-8') as f:
@@ -40,7 +54,7 @@ print('=' * LINE_WIDTH)
 print()
 print('1. Добавить оценку')
 print('2. Показать всех студентов')
-print('3. Средние по предметам (студент)')
+print('3. Средние по предметам')
 print('4. Общий средний балл студента')
 print('5. Рейтинг студентов')
 print('6. Выход')
@@ -54,3 +68,6 @@ elif num == 2:
 
 elif num == 3:
     print_students(grades, 3)
+
+elif num == 4:
+    average_score(grades)
