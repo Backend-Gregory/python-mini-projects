@@ -25,10 +25,9 @@ def print_students(grades, e=2):
             print(f'   {lesson}:', end=' ')
             if e == 2:
                 print(gr, end='')
-            print(f' [{average}]')
+            print(f' [{average:.2f}]')
 
-def average_score(grades):
-    student = input('Средний балл студента: ')
+def get_student_average(grades, student):
     count = 0
     sm = 0
     if student in grades:
@@ -38,9 +37,29 @@ def average_score(grades):
             count += len(grade)
             sm += sum(grade)
         average = sm / count
-        print(f'Ср. балл студена {student}: {average}')
+        return average
     else:
-        print(f'Студента {student} найти не удалось.')
+        return None
+
+def average_score(grades):
+    student = input('Средний балл студента: ')
+    avg = get_student_average(grades, student)
+    if avg is None:
+        print(f'Студент {student} или нет оценок.')
+    else:
+        print(f'Средний балл студента {student}: {avg:.2f}')
+
+def student_rating(grades):
+    rating = []
+    for student in grades:
+        avg = get_student_average(grades, student)
+        if avg is not None:
+            rating.append((student, avg))
+    rating.sort(key=lambda x: x[1], reverse=True)
+    print('РЕЙТИНГ СТУДЕНТОВ')
+    for place, (student, avg) in enumerate(rating, 1):
+        print(f'{place}. {student}: {avg:.2f}')
+
 
 if os.path.exists(FILE):
     with open(FILE, encoding='utf-8') as f:
@@ -71,3 +90,6 @@ elif num == 3:
 
 elif num == 4:
     average_score(grades)
+
+elif num == 5:
+    student_rating(grades)
