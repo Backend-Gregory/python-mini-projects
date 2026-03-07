@@ -70,26 +70,30 @@ else:
 print('=' * LINE_WIDTH)
 print('СИСТЕМА ОЦЕНОК СТУДЕНТОВ')
 print('=' * LINE_WIDTH)
-print()
-print('1. Добавить оценку')
-print('2. Показать всех студентов')
-print('3. Средние по предметам')
-print('4. Общий средний балл студента')
-print('5. Рейтинг студентов')
-print('6. Выход')
-num = int(input('Выберите действие (1-6): '))
 
-if num == 1:
-    add_grade(grades)
+while True:
+    print()
+    print('1. Добавить оценку')
+    print('2. Показать всех студентов')
+    print('3. Средние по предметам')
+    print('4. Общий средний балл студента')
+    print('5. Рейтинг студентов')
+    print('6. Выход')
+    num = int(input('Выберите действие (1-6): '))
 
-elif num == 2:
-    print_students(grades)
+    if num == 1:
+        add_grade(grades)
 
-elif num == 3:
-    print_students(grades, 3)
+    elif num == 2:
+        print_students(grades)
 
-elif num == 4:
-    average_score(grades)
+    elif num == 3:
+        print_students(grades, 3)
 
-elif num == 5:
-    student_rating(grades)
+    elif num == 4:
+        average_score(grades)
+
+    elif num == 5:
+        student_rating(grades)
+    elif num == 6:
+        break
