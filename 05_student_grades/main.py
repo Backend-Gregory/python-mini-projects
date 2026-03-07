@@ -2,6 +2,31 @@ import json
 import os
 LINE_WIDTH = 45
 FILE = 'grades.json'
+
+def add_grade(grades):
+    name = input('Имя студента: ')
+    lesson = input('Урок оценивания: ')
+    grade = input('Оценка: ')
+
+    grades.setdefault(name, {})
+    grades[name].setdefault(lesson, []).append(int(grade))
+
+    with open(FILE, 'w', encoding='utf-8') as f:
+        json.dump(grades, f, ensure_ascii=False, indent=2)
+    print('Оценка сохранена.')
+
+def print_students(grades):
+    for name in grades:
+        print(f'{name}:')
+        for lesson in grades[name]:
+            print(f'{lesson}: {grades[name][lesson]}')
+
+if os.path.exists(FILE):
+    with open(FILE, encoding='utf-8') as f:
+        grades = json.load(f)
+else:
+    grades = {}
+
 print('=' * LINE_WIDTH)
 print('СИСТЕМА ОЦЕНОК СТУДЕНТОВ')
 print('=' * LINE_WIDTH)
@@ -14,17 +39,7 @@ print('5. Рейтинг студентов')
 print('6. Выход')
 num = int(input('Выберите действие (1-6): '))
 if num == 1:
-    name = input('Имя студента: ')
-    lesson = input('Урок оценивания: ')
-    grade = input('Оценка: ')
-    if os.path.exists(FILE):
-        with open(FILE, encoding='utf-8') as f:
-            grades = json.load(f)
-    else:
-        grades = {}
-    grades.setdefault(name, {})
-    grades[name].setdefault(lesson, []).append(int(grade))
+    add_grade(grades)
 
-    with open(FILE, 'w', encoding='utf-8') as f:
-        json.dump(grades, f, ensure_ascii=False, indent=2)
-    print('Оценка сохранена.')
+elif num == 2:
+    print_students(grades)
