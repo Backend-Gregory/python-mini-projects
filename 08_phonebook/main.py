@@ -22,3 +22,10 @@ if num == 1:
     with open(FILE, "w", encoding="utf-8") as f:
         json.dump(contacts, f, ensure_ascii=False, indent=2)
     print("Контакт сохранен")
+
+elif num == 4:
+    if contacts:
+        for ch in contacts:
+            print(f'{ch['name']}: {ch['number']}')
+    else:
+        print("У вас нет ни одного контакта.")
