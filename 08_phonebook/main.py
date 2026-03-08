@@ -1,6 +1,7 @@
 import json
 import os
 
+LINE_WIDTH = 45
 FILE = "contacts.json"
 
 if os.path.exists(FILE):
@@ -38,25 +39,32 @@ def print_contacts(contacts):
     else:
         print("У вас нет ни одного контакта.")
 
-print("1. Добавить контакт")
-print("2. Найти по имени")
-print("3. Найти по номеру")
-print("4. Показать все контакты")
-print("5. Выход")
-num = int(input("Выберите действие: "))
+print('=' * LINE_WIDTH)
+print('Телефонный справочник')
+print('=' * LINE_WIDTH)
+while True:
+    print("1. Добавить контакт")
+    print("2. Найти по имени")
+    print("3. Найти по номеру")
+    print("4. Показать все контакты")
+    print("5. Выход")
+    num = int(input("Выберите действие: "))
 
-if num == 1:
-    add_contact(contacts)
+    if num == 1:
+        add_contact(contacts)
 
-elif num == 2:
-    name = input("Введите имя: ")
-    by = 'name'
-    find_by_name_or_number(contacts, name, by)
+    elif num == 2:
+        name = input("Введите имя: ")
+        by = 'name'
+        find_by_name_or_number(contacts, name, by)
 
-elif num == 3:
-    number = input("Введите номер: ")
-    by = 'number'
-    find_by_name_or_number(contacts, number, by)
+    elif num == 3:
+        number = input("Введите номер: ")
+        by = 'number'
+        find_by_name_or_number(contacts, number, by)
 
-elif num == 4:
-    print_contacts(contacts)
+    elif num == 4:
+        print_contacts(contacts)
+    
+    elif num == 5:
+        break
