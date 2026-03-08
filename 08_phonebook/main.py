@@ -48,6 +48,7 @@ def find_by_name_or_number(contacts, value, key):
 
 def print_contacts(contacts):
     if contacts:
+        print()
         for ch in contacts:
             print(f"{ch['name']}: {ch['number']}")
     else:
@@ -57,6 +58,7 @@ print('=' * LINE_WIDTH)
 print('Телефонный справочник')
 print('=' * LINE_WIDTH)
 while True:
+    print()
     print("1. Добавить контакт")
     print("2. Найти по имени")
     print("3. Найти по номеру")
