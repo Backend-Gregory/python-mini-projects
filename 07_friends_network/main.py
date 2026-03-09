@@ -12,7 +12,7 @@ def get_friends_sets(dict_friends):
 
 def mutual_friends(dict_friends, user1, user2):
     if user1 not in dict_friends or user2 not in dict_friends:
-        print("Ошибка! Оного из пользователей нету в списке")
+        print("Ошибка! Одного из пользователей нет в списке")
         return
     
     user1_friends = set(dict_friends[user1])
@@ -36,6 +36,9 @@ def find_mutual(dict_friends):
                 print(f"{user1.capitalize()} и {user2.capitalize()}")
 
 def recommendation(dict_friends, user):
+    if user not in dict_friends:
+        print(f"Пользователь {user} не найден")
+        return
     friends_set = get_friends_sets(dict_friends)
 
     res = set()
@@ -58,9 +61,15 @@ if not os.path.exists(FILE):
     print('Введите имя и после ":" друзей через запятую (или "стоп" для завершения):')
     dict_friends = {}
     while True:
-        s = input()
+        s = input().strip()
+        if not s:
+            print("Ввод не может быть пустым")
+            continue
         if 'стоп' in s.lower():
             break
+        if ":" not in s:
+            print("Ошибка! Неправильный формат ввода (имя: друзья через ',')")
+            continue
         name, friends = s.split(":")
         name = name.lower()
         friends = [friend.strip().lower() for friend in friends.split(",")]
@@ -80,7 +89,13 @@ while True:
     print('2. Найти взаимных друзей')
     print('3. Получить рекомендации')
     print('4. Выход')
-    num = int(input("Выберите действие: "))
+    try:
+        num = int(input("Выберите действие (1-4): "))
+        if not(1 <= num <= 4):
+            print("Ошибка! Введите число от 1 до 4")
+            continue
+    except ValueError:
+        print("Ошибка! Введите число")
 
     if num == 1:
         user1 = input("Введите первого пользователя: ").strip().lower()
@@ -93,5 +108,6 @@ while True:
     elif num == 3:
         user = input('Введите пользователя: ')
         recommendation(dict_friends, user)
+
     elif num == 4:
         break
