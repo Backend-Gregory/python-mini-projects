@@ -70,18 +70,27 @@ if not os.path.exists(FILE):
         if ":" not in s:
             print("Ошибка! Неправильный формат ввода (имя: друзья через ',')")
             continue
-        name, friends = s.split(":")
+        name, friends = s.split(":", 1)
+        if not name:
+            print("Имя не может быть пустым")
+            continue
         name = name.lower()
         friends = [friend.strip().lower() for friend in friends.split(",")]
         dict_friends[name] = list(set(friends))
     with open(FILE, 'w', encoding='utf-8') as file:
         json.dump(dict_friends, file, ensure_ascii=False, indent=2)
 else:
-    with open(FILE, encoding='utf-8') as file:
-        dict_friends = json.load(file)
+    try:
+        with open(FILE, encoding='utf-8') as file:
+            dict_friends = json.load(file)
+    except json.JSONDecodeError:
+        print("⚠️ Файл повреждён. Создаю новый.")
+        dict_friends = {}
 
-users = ', '.join(dict_friends.keys())
+
+users = ', '.join(dict_friends.keys()) or "нет пользователей"
 while True:
+    print()
     print(f'Доступные пользователи: {users}')
 
     print()
@@ -106,7 +115,7 @@ while True:
         find_mutual(dict_friends)
 
     elif num == 3:
-        user = input('Введите пользователя: ')
+        user = input('Введите пользователя: ').lower()
         recommendation(dict_friends, user)
 
     elif num == 4:
