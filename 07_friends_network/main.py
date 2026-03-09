@@ -31,7 +31,22 @@ def find_mutual(dict_friends):
             if user2 in friends_set and user1 in friends_set[user2] and user1 < user2:
                 print(f"{user1.capitalize()} и {user2.capitalize()}")
 
+def recommendation(dict_friends, user):
+    friends_set = {}
+    for i in dict_friends:
+        friends_set[i] = set(dict_friends[i])
 
+    res = set()
+    for friend in friends_set[user]:
+        if friend in friends_set:
+            res |= friends_set[friend]
+    res -= friends_set[user]
+    res.discard(user)
+    user = user.capitalize()
+    if res:
+        print(f'Рекомендации для пользователя {user}: {", ".join(r.capitalize() for r in res)}')
+    else:
+        print(f'Для пользователя {user} нет рекомендаций')
 
 print('=' * LINE_WIDTH)
 print('ПОИСК ДРУЗЕЙ В СОЦСЕТИ')
@@ -71,3 +86,7 @@ if num == 1:
 
 elif num == 2:
     find_mutual(dict_friends)
+
+elif num == 3:
+    user = input('Введите пользователя: ')
+    recommendation(dict_friends, user)
