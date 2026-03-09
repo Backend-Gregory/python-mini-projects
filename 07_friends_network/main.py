@@ -20,8 +20,9 @@ if not os.path.exists(FILE):
     with open(FILE, 'w', encoding='utf-8') as file:
         json.dump(dcit_friends, file, ensure_ascii=False, indent=2)
 
-with open(FILE, encoding='utf-8') as file:
-    dcit_friends = json.load(file)
+else:
+    with open(FILE, encoding='utf-8') as file:
+        dcit_friends = json.load(file)
 
 users = ', '.join(dcit_friends.keys())
 print(f'Доступные пользователи: {users}')
