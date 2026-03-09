@@ -16,7 +16,7 @@ if not os.path.exists(FILE):
             break
         name, friends = s.split(":")
         friends = [friend.strip() for friend in friends.split(",")]
-        dcit_friends[name] = friends
+        dcit_friends[name] = list(set(friends))
     with open(FILE, 'w', encoding='utf-8') as file:
         json.dump(dcit_friends, file, ensure_ascii=False, indent=2)
 
