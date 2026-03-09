@@ -72,23 +72,26 @@ else:
         dict_friends = json.load(file)
 
 users = ', '.join(dict_friends.keys())
-print(f'Доступные пользователи: {users}')
+while True:
+    print(f'Доступные пользователи: {users}')
 
-print()
-print('1. Найти общих друзей')
-print('2. Найти взаимных друзей')
-print('3. Получить рекомендации')
-print('4. Выход')
-num = int(input("Выберите действие: "))
+    print()
+    print('1. Найти общих друзей')
+    print('2. Найти взаимных друзей')
+    print('3. Получить рекомендации')
+    print('4. Выход')
+    num = int(input("Выберите действие: "))
 
-if num == 1:
-    user1 = input("Введите первого пользователя: ").strip().lower()
-    user2 = input("Введите второго пользователя: ").strip().lower()
-    mutual_friends(dict_friends, user1, user2)
+    if num == 1:
+        user1 = input("Введите первого пользователя: ").strip().lower()
+        user2 = input("Введите второго пользователя: ").strip().lower()
+        mutual_friends(dict_friends, user1, user2)
 
-elif num == 2:
-    find_mutual(dict_friends)
+    elif num == 2:
+        find_mutual(dict_friends)
 
-elif num == 3:
-    user = input('Введите пользователя: ')
-    recommendation(dict_friends, user)
+    elif num == 3:
+        user = input('Введите пользователя: ')
+        recommendation(dict_friends, user)
+    elif num == 4:
+        break
