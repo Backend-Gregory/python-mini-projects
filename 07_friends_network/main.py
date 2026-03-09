@@ -105,6 +105,7 @@ while True:
             continue
     except ValueError:
         print("Ошибка! Введите число")
+        continue
 
     if num == 1:
         user1 = input("Введите первого пользователя: ").strip().lower()
