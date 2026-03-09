@@ -19,6 +19,19 @@ def mutual_friends(dict_friends, user1, user2):
         res = ', '.join(mutual_friends)
         print(f"Общие друзья: {res}")
 
+def find_mutual(dict_friends):
+    print()
+    print('Взаимные друзья:')
+    friends_set = {}
+    for user in dict_friends:
+        friends_set[user] = set(dict_friends[user])
+    
+    for user1 in friends_set:
+        for user2 in friends_set[user1]:
+            if user2 in friends_set and user1 in friends_set[user2] and user1 < user2:
+                print(f"{user1} и {user2}")
+
+
 
 print('=' * LINE_WIDTH)
 print('ПОИСК ДРУЗЕЙ В СОЦСЕТИ')
@@ -32,11 +45,11 @@ if not os.path.exists(FILE):
         if 'стоп' in s.lower():
             break
         name, friends = s.split(":")
-        friends = [friend.strip() for friend in friends.split(",")]
+        name = name.lower()
+        friends = [friend.strip().lower() for friend in friends.split(",")]
         dict_friends[name] = list(set(friends))
     with open(FILE, 'w', encoding='utf-8') as file:
         json.dump(dict_friends, file, ensure_ascii=False, indent=2)
-
 else:
     with open(FILE, encoding='utf-8') as file:
         dict_friends = json.load(file)
@@ -52,6 +65,9 @@ print('4. Выход')
 num = int(input("Выберите действие: "))
 
 if num == 1:
-    user1 = input("Введите первого пользователя: ").strip()
-    user2 = input("Введите второго пользователя: ").strip()
+    user1 = input("Введите первого пользователя: ").strip().lower()
+    user2 = input("Введите второго пользователя: ").strip().lower()
     mutual_friends(dict_friends, user1, user2)
+
+elif num == 2:
+    find_mutual(dict_friends)
