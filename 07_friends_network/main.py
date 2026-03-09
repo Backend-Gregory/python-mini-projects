@@ -4,6 +4,12 @@ import os
 LINE_WIDTH = 45
 FILE = 'friends.json'
 
+def get_friends_sets(dict_friends):
+    friends_set = {}
+    for user in dict_friends:
+        friends_set[user] = set(dict_friends[user])
+    return friends_set
+
 def mutual_friends(dict_friends, user1, user2):
     if user1 not in dict_friends or user2 not in dict_friends:
         print("Ошибка! Оного из пользователей нету в списке")
@@ -22,9 +28,7 @@ def mutual_friends(dict_friends, user1, user2):
 def find_mutual(dict_friends):
     print()
     print('Взаимные друзья:')
-    friends_set = {}
-    for user in dict_friends:
-        friends_set[user] = set(dict_friends[user])
+    friends_set = get_friends_sets(dict_friends)
     
     for user1 in friends_set:
         for user2 in friends_set[user1]:
@@ -32,9 +36,7 @@ def find_mutual(dict_friends):
                 print(f"{user1.capitalize()} и {user2.capitalize()}")
 
 def recommendation(dict_friends, user):
-    friends_set = {}
-    for i in dict_friends:
-        friends_set[i] = set(dict_friends[i])
+    friends_set = get_friends_sets(dict_friends)
 
     res = set()
     for friend in friends_set[user]:
