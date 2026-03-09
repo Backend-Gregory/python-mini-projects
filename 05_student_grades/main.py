@@ -103,8 +103,11 @@ while True:
     print('6. Выход')
     try:
         num = int(input('Выберите действие (1-6): '))
+        if not (1 <= num <= 6):
+            print('Ошибка! Введите число от 1 до 6')
     except ValueError:
         print('Ошибка! Введите число от 1 до 6')
+        continue
 
     if num == 1:
         add_grade(grades)
