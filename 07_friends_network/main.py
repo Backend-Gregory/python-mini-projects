@@ -29,7 +29,7 @@ def find_mutual(dict_friends):
     for user1 in friends_set:
         for user2 in friends_set[user1]:
             if user2 in friends_set and user1 in friends_set[user2] and user1 < user2:
-                print(f"{user1} и {user2}")
+                print(f"{user1.capitalize()} и {user2.capitalize()}")
 
 
 
