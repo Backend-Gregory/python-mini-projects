@@ -38,6 +38,14 @@ def raise_salary_by_department(employees):
         if employee["department"] == department:
             employee["salary"] = int(employee["salary"] * ((1 + percent / 100) if raise_or_lower == 1 else (1 - percent / 100)))
 
+def fot_by_department(employees):
+    department = input("ФОТ какого отдела вы хотите узнать: ")
+    total = 0
+    for emp_id, employee in employees.items():
+        if employee["department"] == department:
+            total += employee["salary"]
+    print(f"ФОТ отдела {department} {total} руб.")
+
 if os.path.exists(FILE):
     with open(FILE, encoding="utf-8") as file:
         employees = json.load(file)
@@ -59,5 +67,7 @@ if num == 1:
 elif num == 2:
     raise_salary_by_department(employees)
     save()
+elif num == 3:
+    fot_by_department(employees)
 
 
