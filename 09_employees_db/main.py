@@ -28,6 +28,11 @@ def add_employees(employees):
     id = max(int(id) for id in employees) + 1 if employees else 1
     employees[id] = {"name": name, "department": department, "salary": salary}
 
+def remove_employee(employees):
+    id = int(input("Введите id сотрудника которого требуется удалить: "))
+    del employees[id]
+    print("Сотрудник удален")
+
 def raise_salary_by_department(employees):
     print("1. Повысить зарплату отделу")
     print("2. Понизить зарплату отделу")
@@ -55,19 +60,23 @@ else:
 print_all(employees)
 
 print("1. Добавить сотрудника")
-print("2. Повысить или понизить зарплату в отделе")
-print("3. ФОТ по отделу")
-print("4. Выход")
+print("2. Удалить сотрудника")
+print("3. Повысить или понизить зарплату в отделе")
+print("4. ФОТ по отделу")
+print("5. Выход")
 
-num = int(input("Выберите действие (1-4): "))
+num = int(input("Выберите действие (1-5): "))
 if num == 1:
     add_employees(employees)
     save()
     print("Сотрудник сохранен")
 elif num == 2:
-    raise_salary_by_department(employees)
+    remove_employee(employees)
     save()
 elif num == 3:
+    raise_salary_by_department(employees)
+    save()
+elif num == 4:
     fot_by_department(employees)
 
 
