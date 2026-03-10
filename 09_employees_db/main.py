@@ -7,6 +7,20 @@ def save():
     with open(FILE, 'w', encoding='utf-8') as file:
         json.dump(employees, file, ensure_ascii=False, indent=2)
 
+def print_all(employees):
+    if not employees:
+        print("Сотрудники не найдены")
+        return
+    
+    print("СОТРУДНИКИ:")
+    for emp_id in employees:
+        employee = employees[emp_id]
+        name = employee["name"]
+        department = employee["department"]
+        salary = employee["salary"]
+        print(f'{name} ({department}) - {salary}')
+    print()
+
 def add_employees(employees):
     name = input("Имя сотрудника: ")
     department = input("Отдел сотрудника: ")
@@ -21,6 +35,8 @@ if os.path.exists(FILE):
 else:
     employees = {}
 
+print_all(employees)
+
 print("1. Добавить сотрудника")
 print("2. Повысить или понизить зарплату в отделе")
 print("3. ФОТ по отделу")
@@ -31,4 +47,5 @@ if num == 1:
     add_employees(employees)
     save()
     print("Сотрудник сохранен")
+
 
