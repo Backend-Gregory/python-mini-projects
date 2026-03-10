@@ -27,7 +27,16 @@ def add_employees(employees):
     salary = int(input("Зарплата сотрудника: "))
     id = max(int(id) for id in employees) + 1 if employees else 1
     employees[id] = {"name": name, "department": department, "salary": salary}
-    
+
+def raise_salary_by_department(employees):
+    print("1. Повысить зарплату отделу")
+    print("2. Понизить зарплату отделу")
+    raise_or_lower = int(input("Выберите действие (1-2): "))
+    percent = int(input("На сколько процентов (Введите цифру): "))
+    department = input("Какому отделу: ")
+    for emp_id, employee in employees.items():
+        if employee["department"] == department:
+            employee["salary"] = int(employee["salary"] * ((1 + percent / 100) if raise_or_lower == 1 else (1 - percent / 100)))
 
 if os.path.exists(FILE):
     with open(FILE, encoding="utf-8") as file:
@@ -42,10 +51,13 @@ print("2. Повысить или понизить зарплату в отде�
 print("3. ФОТ по отделу")
 print("4. Выход")
 
-num = int(input("Выберите действие: "))
+num = int(input("Выберите действие (1-4): "))
 if num == 1:
     add_employees(employees)
     save()
     print("Сотрудник сохранен")
+elif num == 2:
+    raise_salary_by_department(employees)
+    save()
 
 
