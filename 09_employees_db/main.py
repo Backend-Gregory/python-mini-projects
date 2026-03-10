@@ -59,24 +59,25 @@ else:
 
 print_all(employees)
 
-print("1. Добавить сотрудника")
-print("2. Удалить сотрудника")
-print("3. Повысить или понизить зарплату в отделе")
-print("4. ФОТ по отделу")
-print("5. Выход")
+while True:
+    print("1. Добавить сотрудника")
+    print("2. Удалить сотрудника")
+    print("3. Повысить или понизить зарплату в отделе")
+    print("4. ФОТ по отделу")
+    print("5. Выход")
 
-num = int(input("Выберите действие (1-5): "))
-if num == 1:
-    add_employees(employees)
-    save()
-    print("Сотрудник сохранен")
-elif num == 2:
-    remove_employee(employees)
-    save()
-elif num == 3:
-    raise_salary_by_department(employees)
-    save()
-elif num == 4:
-    fot_by_department(employees)
-
-
+    num = int(input("Выберите действие (1-5): "))
+    if num == 1:
+        add_employees(employees)
+        save()
+        print("Сотрудник сохранен")
+    elif num == 2:
+        remove_employee(employees)
+        save()
+    elif num == 3:
+        raise_salary_by_department(employees)
+        save()
+    elif num == 4:
+        fot_by_department(employees)
+    elif num == 5:
+        break
