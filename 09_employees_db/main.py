@@ -25,7 +25,7 @@ def add_employees(employees):
     name = input("Имя сотрудника: ")
     department = input("Отдел сотрудника: ")
     salary = int(input("Зарплата сотрудника: "))
-    id = len(employees) + 1
+    id = max(int(id) for id in employees) + 1 if employees else 1
     employees[id] = {"name": name, "department": department, "salary": salary}
     
 
