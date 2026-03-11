@@ -19,7 +19,7 @@ while True:
 
     result = get_rate(currency1, currency2, amount)
 
-    print(f"{amount} {currency1} - {result} {currency2}")
+    print(f"{amount} {currency1} - {result} {currency2:.2f}")
 
     
     exit_true = False
