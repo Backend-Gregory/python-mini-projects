@@ -10,9 +10,9 @@
 
 
 ## 📊 Статус выполнения
-✅ Готово: 10/15   
+✅ Готово: 11/15   
 🟡 В процессе: 1  
-⬜ Запланировано: 5
+⬜ Запланировано: 4
 
 Обновляется по мере добавления проектов
 
@@ -30,7 +30,7 @@
 | ✅ | **Поиск друзей в соцсети** | множества + словари | [07_friends_network](07_friends_network) |
 | ✅ | **Телефонный справочник** | словари, CRUD | [08_phonebook](08_phonebook) |
 | ✅ | **База данных сотрудников** | вложенные словари | [09_employees_db](09_employees_db) |
-| 10 | **Конвертер валют** | API, requests | [10_currency_converter](10_currency_converter) |
+| ✅ | **Конвертер валют** | API, requests | [10_currency_converter](10_currency_converter) |
 | 11 | **Калькулятор для бухгалтера** | decimal | [11_accountant_calc](11_accountant_calc) |
 | 12 | **Снежинка Коха** | turtle, рекурсия | [12_koch_snowflake](12_koch_snowflake) |
 | 13 | **Декоратор для отладки** | функции высшего порядка | [13_debug_decorator](13_debug_decorator) |
