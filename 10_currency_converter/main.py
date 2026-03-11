@@ -12,10 +12,27 @@ print('=' * LINE_WIDTH)
 print('КОНВЕРТЁР ВАЛЮТ')
 print('=' * LINE_WIDTH)
 
-currency1 = input("Введите исходную валюту (например USD): ")
-currency2 = input("Введите целевую валюту (например RUB): ")
-amount = float(input(f"Сколько {currency1} конвертируем в {currency2}?: "))
+while True:
+    currency1 = input("Введите исходную валюту (например USD): ")
+    currency2 = input("Введите целевую валюту (например RUB): ")
+    amount = float(input(f"Сколько {currency1} конвертируем в {currency2}?: "))
 
-result = get_rate(currency1, currency2, amount)
+    result = get_rate(currency1, currency2, amount)
 
-print(f"{amount} {currency1} - {result} {currency2}")
+    print(f"{amount} {currency1} - {result} {currency2}")
+
+    
+    exit_true = False
+    while True:
+        exit = input("Хотите конвертировать ещё что нибудь? (да/нет): ").lower()
+        if exit != "нет" and exit != "да":
+            print("Ошибка! введите да или нет")
+            continue
+        if exit == 'нет':
+            exit_true = True
+            break
+        else:
+            break
+    
+    if exit_true:
+        break
