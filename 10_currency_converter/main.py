@@ -25,6 +25,7 @@ print('КОНВЕРТЁР ВАЛЮТ')
 print('=' * LINE_WIDTH)
 
 while True:
+    print()
     currency1 = input("Введите исходную валюту (например USD): ").upper()
     currency2 = input("Введите целевую валюту (например RUB): ").upper()
     if not currency1 or not currency2:
