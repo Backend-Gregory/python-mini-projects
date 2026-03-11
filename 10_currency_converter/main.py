@@ -1,11 +1,23 @@
 import requests
 
 def get_rate(base, target, sm):
-    response = requests.get(f"https://api.exchangerate-api.com/v4/latest/{base}")
-    data = response.json()
-    res = data["rates"][target] * sm
-    return res
-
+    try:
+        response = requests.get(f"https://api.exchangerate-api.com/v4/latest/{base}", timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            if target in data["rates"]:
+                res = data["rates"][target] * sm
+                print(f"{sm} {base} - {res:.2f} {target}")
+            else:
+                print(f"Валюта {target} не найдена")
+        else:
+            print(f"Ошибка сервера: {response.status_code}")
+    except requests.ConnectionError:
+        print("Нет подключения к интернету")
+    except requests.Timeout:
+        print("Сервер слишком долго отвечает")
+    except Exception as e:
+        print(f"Неизвестная ошибка {e}")
 
 LINE_WIDTH = 45
 print('=' * LINE_WIDTH)
@@ -13,15 +25,22 @@ print('КОНВЕРТЁР ВАЛЮТ')
 print('=' * LINE_WIDTH)
 
 while True:
-    currency1 = input("Введите исходную валюту (например USD): ")
-    currency2 = input("Введите целевую валюту (например RUB): ")
-    amount = float(input(f"Сколько {currency1} конвертируем в {currency2}?: "))
+    currency1 = input("Введите исходную валюту (например USD): ").upper()
+    currency2 = input("Введите целевую валюту (например RUB): ").upper()
+    if not currency1 or not currency2:
+        print("Валюты не могут быть пустыми")
+        continue
+    try:
+        amount = float(input(f"Сколько {currency1} конвертируем в {currency2}?: "))
+        if amount <= 0:
+            print("Сумма конвертации должна быть больше 0")
+            continue
+    except ValueError:
+        print("Сумма конвертации должна состоять из цифр")
+        continue
 
-    result = get_rate(currency1, currency2, amount)
+    get_rate(currency1, currency2, amount)
 
-    print(f"{amount} {currency1} - {result} {currency2:.2f}")
-
-    
     exit_true = False
     while True:
         exit = input("Хотите конвертировать ещё что нибудь? (да/нет): ").lower()
