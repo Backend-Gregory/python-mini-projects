@@ -4,7 +4,7 @@ def get_amount_and_calculate(percent_value, e="грязными"):
     try:
         amount = Decimal(input(f"Введите зарплату ({e}): "))
         percent = Decimal(percent_value)
-        
+
         if not amount:
             print("Сумма не может быть пустой")
             return
@@ -21,7 +21,7 @@ def get_amount_and_calculate(percent_value, e="грязными"):
         print("Ошибка! Деление на ноль")
         return
     
-    rounded = res.quantize('0.01', rounding=R)
+    rounded = res.quantize(Decimal('0.01'), rounding=R)
     print(f"{rounded}₽")
 
 LINE_WIDTH = 45
