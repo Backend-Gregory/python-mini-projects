@@ -1,5 +1,10 @@
 from decimal import Decimal, ROUND_HALF_UP as R
 
+def get_amount_and_calculate(percent_value):
+    amount = Decimal(input("Введите зарплату (грязными): "))
+    percent = Decimal(percent_value)
+    Calculate(amount, percent)
+
 def Calculate(amount, percent):
     res = amount * (percent / 100)
     rounded = res.quantize(Decimal("0.01"), rounding=R)
@@ -17,10 +22,6 @@ print('3. Рассчитать сумму "грязными" (указывай �
 print('4. Выход')
 num = int(input('Выберите действие (1-4): '))
 if num == 1:
-    amount = Decimal(input("Введите зарплату (грязными): "))
-    percent = Decimal('13')
-    Calculate(amount, percent)
+    get_amount_and_calculate('13')
 elif num == 2:
-    amount = Decimal(input("Введите зарплату (грязными): "))
-    percent = Decimal('30')
-    Calculate(amount, percent)
+    get_amount_and_calculate('30')
