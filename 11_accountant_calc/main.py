@@ -1,12 +1,26 @@
-from decimal import Decimal, ROUND_HALF_UP as R
+from decimal import Decimal, ROUND_HALF_UP as R, InvalidOperation, DivisionByZero
 
 def get_amount_and_calculate(percent_value, e="грязными"):
-    amount = Decimal(input(f"Введите зарплату ({e}): "))
-    percent = Decimal(percent_value)
-    if e == "грязными":
-        res = amount * (percent / 100)
-    else:
-        res = amount * 100 / (100 - percent)
+    try:
+        amount = Decimal(input(f"Введите зарплату ({e}): "))
+        percent = Decimal(percent_value)
+        
+        if not amount:
+            print("Сумма не может быть пустой")
+            return
+
+        if e == "грязными":
+            res = amount * (percent / 100)
+        else:
+            res = amount * 100 / (100 - percent)
+
+    except InvalidOperation:
+        print("Ошибка! Введите число, используя точку (например 100.50)")
+        return
+    except DivisionByZero:
+        print("Ошибка! Деление на ноль")
+        return
+    
     rounded = res.quantize('0.01', rounding=R)
     print(f"{rounded}₽")
 
@@ -22,7 +36,15 @@ while True:
     print('3. Рассчитать сумму "грязными" (указывай чистыми): ')
     print('4. Выход')
 
-    num = int(input('Выберите действие (1-4): '))
+    try:
+        num = int(input('Выберите действие (1-4): '))
+        if not (1 <= num <= 4):
+            print("Число должо быть от 1 до 4")
+            continue
+    except ValueError:
+        print("Введите число")
+        continue
+
     if num == 1:
         get_amount_and_calculate('13')
     elif num == 2:
