@@ -20,3 +20,7 @@ if num == 1:
     amount = Decimal(input("Введите зарплату (грязными): "))
     percent = Decimal('13')
     Calculate(amount, percent)
+elif num == 2:
+    amount = Decimal(input("Введите зарплату (грязными): "))
+    percent = Decimal('30')
+    Calculate(amount, percent)
