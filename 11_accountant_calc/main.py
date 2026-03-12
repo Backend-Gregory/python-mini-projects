@@ -3,7 +3,7 @@ from decimal import Decimal, ROUND_HALF_UP as R
 def Calculate(amount, percent):
     res = amount * (percent / 100)
     rounded = res.quantize(Decimal("0.01"), rounding=R)
-    print(rounded)
+    print(f'{rounded}₽')
 
 LINE_WIDTH = 45
 
