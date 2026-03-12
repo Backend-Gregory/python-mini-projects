@@ -1,14 +1,15 @@
 from decimal import Decimal, ROUND_HALF_UP as R
 
-def get_amount_and_calculate(percent_value):
-    amount = Decimal(input("Введите зарплату (грязными): "))
+def get_amount_and_calculate(percent_value, e="грязными"):
+    amount = Decimal(input(f"Введите зарплату ({e}): "))
     percent = Decimal(percent_value)
-    Calculate(amount, percent)
+    res = Calculate(amount, percent) if e == "грязными" else amount * 100 / (100 - percent)
+    print(f'{res}₽')
 
 def Calculate(amount, percent):
     res = amount * (percent / 100)
     rounded = res.quantize(Decimal("0.01"), rounding=R)
-    print(f'{rounded}₽')
+    return rounded
 
 LINE_WIDTH = 45
 
@@ -25,3 +26,5 @@ if num == 1:
     get_amount_and_calculate('13')
 elif num == 2:
     get_amount_and_calculate('30')
+elif num == 3:
+    get_amount_and_calculate('13', "чистыми")
