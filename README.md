@@ -10,9 +10,9 @@
 
 
 ## 📊 Статус выполнения
-✅ Готово: 11/15   
+✅ Готово: 12/15   
 🟡 В процессе: 1  
-⬜ Запланировано: 4
+⬜ Запланировано: 3
 
 Обновляется по мере добавления проектов
 
@@ -31,7 +31,7 @@
 | ✅ | **Телефонный справочник** | словари, CRUD | [08_phonebook](08_phonebook) |
 | ✅ | **База данных сотрудников** | вложенные словари | [09_employees_db](09_employees_db) |
 | ✅ | **Конвертер валют** | API, requests | [10_currency_converter](10_currency_converter) |
-| 11 | **Калькулятор для бухгалтера** | decimal | [11_accountant_calc](11_accountant_calc) |
+| ✅ | **Калькулятор для бухгалтера** | decimal | [11_accountant_calc](11_accountant_calc) |
 | 12 | **Снежинка Коха** | turtle, рекурсия | [12_koch_snowflake](12_koch_snowflake) |
 | 13 | **Декоратор для отладки** | функции высшего порядка | [13_debug_decorator](13_debug_decorator) |
 | 14 | **Конвейер обработки данных** | map, filter, reduce | [14_data_pipeline](14_data_pipeline) |
