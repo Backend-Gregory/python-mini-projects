@@ -3,6 +3,8 @@ import json
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
+FILE = 'books.json'
+
 url = 'http://books.toscrape.com/'
 count = 1
 dct = {}
@@ -23,5 +25,12 @@ def parse_page(url, count):
         nal = book.find('p', class_="instock availability").text.strip()
         rating = book.find('p', class_='star-rating')['class'][1]
         dct.setdefault(s, {})[title] = {'цена': price, 'рейтинг': rating, 'наличие': nal}
+
+    
+    next_tag = soup.find('li', class_='next')
+    if next_tag:
+        next_url = urljoin(url, next_tag.find('a')['href'])
+        count += 1
+        parse_page(next_url, count)
 
 parse_page(url, 1)
