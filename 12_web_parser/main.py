@@ -33,4 +33,11 @@ def parse_page(url, count):
         count += 1
         parse_page(next_url, count)
 
+def save(data):
+    with open(FILE, 'w', encoding='utf-8') as file:
+        json.dump(data, file, ensure_ascii=False, indent=2)
+        print('Данные сохранены')
+
+print('Подождите идет парсинг...')
 parse_page(url, 1)
+save(dct)
