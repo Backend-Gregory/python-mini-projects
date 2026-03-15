@@ -10,7 +10,7 @@
 
 
 ## 📊 Статус выполнения
-✅ Готово: 13/15   
+✅ Готово: 14/15   
 🟡 В процессе: 1  
 ⬜ Запланировано: 2
 
@@ -33,7 +33,7 @@
 | ✅ | **Конвертер валют** | API, requests | [10_currency_converter](10_currency_converter) |
 | ✅ | **Калькулятор для бухгалтера** | decimal | [11_accountant_calc](11_accountant_calc) |
 | ✅ | **Парсер книг** | requests + BeautifulSoup | [12_web_parser](12_web_parser) |
-| 13 | **Декоратор для отладки** | функции высшего порядка | [13_debug_decorator](13_debug_decorator) |
+| ✅ | **Декоратор для отладки** | функции высшего порядка | [13_debug_decorator](13_debug_decorator) |
 | 14 | **Конвейер обработки данных** | map, filter, reduce | [14_data_pipeline](14_data_pipeline) |
 | ✅ | **Личный дневник** | работа с файлами | [15_file_diary](15_file_diary) |
 
