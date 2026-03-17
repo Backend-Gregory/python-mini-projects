@@ -32,12 +32,18 @@ type_of_memory = size_tuple[1]
 average_size = size / count
 average_size_true = translating_from_bytes(average_size)
 
+top5_ip = unique_ip.most_common(5)
+
 print("=" * LINE_WIDTH)
 print("ЛОГ-АНАЛИЗАТОР")
 print("=" * LINE_WIDTH)
 print()
 print(f"Всего запросов: {count}")
 print(f"Уникальных IP-адресов: {len(unique_ip)}")
+print()
+print("ТОП-5 IP ПО КОЛИЧЕСТВУ ЗАПРОСОВ:")
+for rank, (ip, cnt) in enumerate(top5_ip, 1):
+    print(f"{rank}. {ip} → {cnt}")
 print()
 print("СТАТИСТИКА ПО СТАТУСАМ:")
 print(f"✅ Успешных (200): {status_counter['200']}")
@@ -46,4 +52,4 @@ print(f"❌ Ошибок клиента (404, 403): {status_counter['404'] + sta
 print(f"💥 Ошибок сервера (500): {status_counter['500']}")
 print()
 print(f"Общий объём переданных данных: {size_final:.1f} {type_of_memory}")
-print(f'Средний размер ответа: {average_size_true[0]:.1f} {type_of_memory}')
+print(f'Средний размер ответа: {average_size_true[0]:.1f} {average_size_true[1]}')
