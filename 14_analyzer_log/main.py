@@ -17,33 +17,53 @@ def translating_from_bytes(size):
     else:
         return (size, "Байт")
 
-with open(FILE, encoding="utf-8") as logs:
-    for count, log in enumerate(logs, 1):
-        parts = log.split()
-        ip = parts[0]
-        status = parts[-2]
-        size_log = int(parts[-1])
+try:
+    with open(FILE, encoding="utf-8") as logs:
+        for count, log in enumerate(logs, 1):
+            try:
+                parts = log.split()
+                ip = parts[0]
+                status = parts[-2]
+                size_log = int(parts[-1])
 
-        unique_ip[ip] += 1
-        status_counter[status] += 1
-        size += size_log
+                unique_ip[ip] += 1
+                status_counter[status] += 1
+                size += size_log
 
-        if size_log >= 1_048_576:
-            mb1 = True
-        if not ip.startswith('192.168.'):
-            local_ip = False
+                if size_log >= 1_048_576:
+                    mb1 = True
+                if not ip.startswith('192.168.'):
+                    local_ip = False
+            except (IndexError, ValueError):
+                continue
+
+except FileNotFoundError:
+    print(f"❌ Файл {FILE} не найден")
+except PermissionError:
+    print(f"❌ Нет прав на чтение {FILE}")
+except Exception as e:
+    print(f"Неизвестная ошибка {e}")
 
 size_tuple = translating_from_bytes(size)
 size_final = size_tuple[0]
 type_of_memory = size_tuple[1]
-average_size = size / count
-average_size_true = translating_from_bytes(average_size)
+
+if count > 0:
+    average_size = size / count
+    average_size_true = translating_from_bytes(average_size)
+else:
+    average_size_true = (0, "Байт")
+    type_of_memory = "Байт"
 
 top5_ip = unique_ip.most_common(5)
 
-errors = filter(lambda s: s.startswith('4') or s.startswith('5'), status_counter)
-most_common_error = max(errors, key=lambda s: status_counter[s])
-error_count = status_counter[most_common_error]
+if status_counter:
+    errors = filter(lambda s: s.startswith('4') or s.startswith('5'), status_counter)
+    most_common_error = max(errors, key=lambda s: status_counter[s])
+    error_count = status_counter[most_common_error]
+else:
+    most_common_error = 'нет ошибок'
+    error_count = 0
 
 print("=" * LINE_WIDTH)
 print("ЛОГ-АНАЛИЗАТОР")
