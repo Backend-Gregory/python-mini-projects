@@ -6,6 +6,8 @@ FILE = "access.log"
 unique_ip = Counter()
 status_counter = Counter()
 size = 0
+mb1 = False
+local_ip = True
 
 def translating_from_bytes(size):
     if size >= 1_048_576:
@@ -25,6 +27,11 @@ with open(FILE, encoding="utf-8") as logs:
         unique_ip[ip] += 1
         status_counter[status] += 1
         size += size_log
+
+        if size_log >= 1_048_576:
+            mb1 = True
+        if not ip.startswith('192.168.'):
+            local_ip = False
 
 size_tuple = translating_from_bytes(size)
 size_final = size_tuple[0]
@@ -59,3 +66,7 @@ print(f"Общий объём переданных данных: {size_final:.1f
 print(f'Средний размер ответа: {average_size_true[0]:.1f} {average_size_true[1]}')
 print()
 print(f"Самая частая ошибка: {most_common_error} ({error_count} раз)")
+print()
+print('Дополнительные проверки:')
+print(f"📈 Есть запросы с объёмом > 1 MB? {'да' if mb1 else 'нет'}")
+print(f"🌍 Все запросы от локальных IP? {'да' if local_ip else 'нет'}")
