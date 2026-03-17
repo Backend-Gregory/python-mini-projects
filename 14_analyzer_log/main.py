@@ -34,6 +34,10 @@ average_size_true = translating_from_bytes(average_size)
 
 top5_ip = unique_ip.most_common(5)
 
+errors = filter(lambda s: s.startswith('4') or s.startswith('5'), status_counter)
+most_common_error = max(errors, key=lambda s: status_counter[s])
+error_count = status_counter[most_common_error]
+
 print("=" * LINE_WIDTH)
 print("ЛОГ-АНАЛИЗАТОР")
 print("=" * LINE_WIDTH)
@@ -53,3 +57,5 @@ print(f"💥 Ошибок сервера (500): {status_counter['500']}")
 print()
 print(f"Общий объём переданных данных: {size_final:.1f} {type_of_memory}")
 print(f'Средний размер ответа: {average_size_true[0]:.1f} {average_size_true[1]}')
+print()
+print(f"Самая частая ошибка: {most_common_error} ({error_count} раз)")
