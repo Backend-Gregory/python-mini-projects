@@ -17,3 +17,6 @@ class User:
     def __init__(self, name):
         self.name = name
         self.watched = {}
+
+    def watch(self, movie, rating):
+        self.watched[movie] = f"Оценка: {rating}"
