@@ -4,3 +4,4 @@ class Movie:
         self.year = year
         self.genre = genre
         self.rating = rating
+        self.similar = []
