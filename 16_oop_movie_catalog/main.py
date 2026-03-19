@@ -5,9 +5,15 @@ class Movie:
         self.genre = genre
         self.rating = rating
         self.similar = []
-    
+
     def add_similar(self, movie):
         self.similar.append(movie)
-    
+
     def get_info(self):
-        return f'{self.title} ({self.year}) - {self.genre}, Рейтинг: {self.rating}'
+        return f"{self.title} ({self.year}) - {self.genre}, Рейтинг: {self.rating}"
+
+
+class User:
+    def __init__(self, name):
+        self.name = name
+        self.watched = {}
