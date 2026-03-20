@@ -144,9 +144,9 @@ else:
         if u["name"] == username:
             user.watched = u["watched"]
             break
-
+        
+print(f"\nПривет, {username}!")
 while True:
-    print(f"\nПривет, {username}!")
     print("1. Добавить просмотр")
     print("2. Получить рекомендации")
     print("3. Выйти")
