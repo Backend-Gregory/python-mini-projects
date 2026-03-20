@@ -27,7 +27,7 @@ class User:
         self.watched = {}
 
     def watch(self, movie, rating):
-        self.watched[movie] = f"Оценка: {rating}"
+        self.watched[movie] = rating
 
 class Recommender:
     @staticmethod
@@ -189,3 +189,20 @@ while True:
         
         save_users(users, movie_by_title)
         print(f"✅ Добавлено: {movie.title} — {rating}")
+
+    elif choice == 2:
+        if not user.watched:
+            print("Вы ещё не оценили ни одного фильма. Добавьте просмотры!")
+            continue
+        
+        rec_rating = Recommender.top_rated(all_movies, 3)
+        rec_genre = Recommender.by_genre(user.watched, all_movies)
+        recs = set(rec_rating + rec_genre)
+        
+        print("\nРекомендации:")
+        for m in recs:
+            if m not in user.watched:
+                print(m.get_info())
+
+    elif choice == 3:
+        break
