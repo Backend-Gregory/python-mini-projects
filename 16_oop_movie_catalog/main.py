@@ -100,3 +100,33 @@ def load_users(movie_dict):
         })
         name_users.append(raw["name"])
     return users, name_users
+
+try:
+    with open(FILE_MOVIES, encoding='utf-8') as f:
+        raw_movies = json.load(f)
+except FileNotFoundError:
+    print("Файл фильмов не найден")
+    exit()
+except json.JSONDecodeError:
+    print('Файл фильмов поврежден')
+    exit()
+
+all_movies = []
+for item in raw_movies:
+    title = item['title']
+    year = item["release_date"][:4] if item["release_date"] else "неизвестно"
+    try:
+        genres_data = json.loads(item["genres"])
+        genres_list = [g['name'] for g in genres_data]
+        genre_str = ', '.join(genres_list)
+    except:
+        genre_str = "неизвестно"
+    
+    try:
+        rating = float(item["vote_average"])
+    except (TypeError, ValueError):
+        rating = 0.0
+    
+    all_movies.append(Movie(title, year, genre_str, rating))
+
+movie_by_title = {m.title: m for m in all_movies}
