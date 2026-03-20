@@ -20,3 +20,8 @@ class User:
 
     def watch(self, movie, rating):
         self.watched[movie] = f"Оценка: {rating}"
+
+class Recommender:
+    @staticmethod
+    def top_rated(all_movies, n):
+        return sorted(all_movies, key=lambda m: m.rating, reverse=True)[:n]
