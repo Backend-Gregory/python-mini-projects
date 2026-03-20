@@ -54,3 +54,49 @@ class Recommender:
         ]
 
         return sorted(candidates, key=lambda m: m.rating, reverse=True)[:3]
+    
+def find_movie_by_title(title, movie_dict):
+    return movie_dict.get(title)
+
+def watched_to_strings(watched):
+    return {movie.title: rating for movie, rating in watched.items()}
+
+def strings_to_watched(watched_dict, movie_dict):
+    result = {}
+    for title, rating in watched_dict.items():
+        movie = movie_dict.get(title)
+        if movie:
+            result[movie] = rating
+    return result
+
+def save_users(users, movie_dict):
+    data_to_save = []
+    for u in users:
+        data_to_save.append({
+            "name": u["name"],
+            "watched": watched_to_strings(u["watched"])
+        })
+    with open(FILE_USERS, 'w', encoding='utf-8') as f:
+        json.dump(data_to_save, f, ensure_ascii=False, indent=2)
+
+def load_users(movie_dict):
+    if not os.path.exists(FILE_USERS):
+        return [], []
+    
+    try:
+        with open(FILE_USERS, encoding='utf-8') as f:
+            raw_users = json.load(f)
+    except json.JSONDecodeError:
+        print('Ошибка! Файл пользователей поврежден. Создаю новый')
+        return [], []
+    
+    users = []
+    name_users = []
+    for raw in raw_users:
+        watched = strings_to_watched(raw["watched"], movie_dict)
+        users.append({
+            "name": raw["name"],
+            "watched": watched
+        })
+        name_users.append(raw["name"])
+    return users, name_users
