@@ -144,3 +144,48 @@ else:
         if u["name"] == username:
             user.watched = u["watched"]
             break
+
+while True:
+    print(f"\nПривет, {username}!")
+    print("1. Добавить просмотр")
+    print("2. Получить рекомендации")
+    print("3. Выйти")
+
+    try:
+        choice = int(input("Выбери действие: "))
+        if choice not in [1, 2, 3]:
+            print("Ошибка! Введите 1, 2 или 3")
+            continue
+    except ValueError:
+        print("Ошибка! Введите число")
+        continue
+
+    if choice == 1:
+        title = input('Введите просмотренный фильм: ').strip()
+        if not title:
+            print('Ошибка! Название не может быть пустым')
+            continue
+
+        try:
+            rating = int(input('Оценка (1-10): '))
+            if not (1 <= rating <= 10):
+                print('Ошибка! Оценка от 1 до 10')
+                continue
+        except ValueError:
+            print('Ошибка! Введите число')
+            continue
+
+        movie = movie_by_title.get(title)
+        if not movie:
+            print("Фильм не найден")
+            continue
+
+        user.watch(movie, rating)
+        
+        for i, u in enumerate(users):
+            if u["name"] == username:
+                users[i]["watched"] = user.watched
+                break
+        
+        save_users(users, movie_by_title)
+        print(f"✅ Добавлено: {movie.title} — {rating}")
