@@ -130,3 +130,17 @@ for item in raw_movies:
     all_movies.append(Movie(title, year, genre_str, rating))
 
 movie_by_title = {m.title: m for m in all_movies}
+
+users, name_users = load_users(movie_by_title)
+
+username = input("Введите имя: ")
+user = User(username)
+
+if username not in name_users:
+    users.append({"name": username, "watched": {}})
+    save_users(users, movie_by_title)
+else:
+    for u in users:
+        if u["name"] == username:
+            user.watched = u["watched"]
+            break
