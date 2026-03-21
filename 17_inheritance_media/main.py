@@ -16,4 +16,18 @@ class Movie(Media):
         self.genre = genre
     
     def info(self):
-        return f'{self.title} ({self.year}) - {self.genre}. Рейтинг: {self.rating}'
+        base = super().info()
+        return f'{base} - {self.genre}. Рейтинг: {self.rating}'
+
+class Series(Media):
+    def __init__(self, title, year, rating, seasons, episodes):
+        super().__init__(title, year, rating)
+        self.seasons = seasons
+        self.episodes = episodes
+
+    def info(self):
+        base = super().info()
+        return f'{base} - Сезон {self.seasons}: Серия: {self.episodes}. Рейтинг: {self.rating}'
+    
+    def is_good(self):
+        return self.rating >= 8
