@@ -31,3 +31,30 @@ class Series(Media):
     
     def is_good(self):
         return self.rating >= 8
+    
+def show_media_list(media_list):
+    for i in media_list:
+        info = i.info()
+        good = '✅' if i.is_good() else '❌'
+        print(info, good)
+
+media_list = []
+
+print('1. Добавить фильм')
+print('2. Добавить сериал')
+print('3. Показать все')
+print('4. Выход')
+
+num = int(input('Выберите действие: '))
+if num == 1 or num == 2:
+    title = input('Введите название: ')
+    year = int(input('Введите год выхода фильма: '))
+    rating = float(input('Оцените фильм от 1 до 10: '))
+    if num == 1:
+        genre = input('Введите жанр: ')
+        obj = Movie(title, year, rating, genre)
+    else:
+        seasons = int(input('Введите сезон числом: '))
+        episodes = int(input('Введите эпизод числом: '))
+        obj = Series(title, year, rating, seasons, episodes)
+    media_list.append(obj)
