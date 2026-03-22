@@ -35,8 +35,30 @@ while True:
 acc = BankAccount(name)
 print(f'Владелец: {acc.owner}')
 
-print(f'Баланс: {acc.balance}')
-print('\n1. Пополнить счет')
-print('2. Снять деньги со счета')
-print('3. Выход')
-num = int(input('Выберите действие от 1 до 3: '))
+while True:
+    print(f'Баланс: {acc.balance}')
+    print('\n1. Пополнить счет')
+    print('2. Снять деньги со счета')
+    print('3. Выход')
+    try:
+        num = int(input('Выберите действие от 1 до 3: '))
+        if num not in [1, 2, 3]:
+            print('Число должно быть от 1 до 3')
+            continue
+    except ValueError:
+        print('Введите число')
+        continue
+    try:
+        if num == 1:
+            amount = int(input('Сколько вносим: '))
+            acc.deposit(amount)
+        elif num == 2:
+            amount = int(input('Сколько снимаем: '))
+            acc.withdraw(amount)
+        else:
+            break
+    except ValueError as e:
+        if 'invalid literal' in str(e):
+            print('Введите число')
+        else:
+            print(e)
