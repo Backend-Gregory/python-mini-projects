@@ -16,3 +16,11 @@ class BankAccount:
             raise ValueError("Сумма пополнения должна быть больше нуля")
         self.__balance += amount
         print('Деньги успешно внесены')
+    
+    def withdraw(self, amount):
+        if amount > self.__balance:
+            raise ValueError('Недостаточно средств')
+        if amount <= 0:
+            raise ValueError("Сумма снятия должна быть больше нуля")
+        self.__balance -= amount
+        print('Деньги успешно сняты')
