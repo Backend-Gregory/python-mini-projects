@@ -24,3 +24,19 @@ class BankAccount:
             raise ValueError("Сумма снятия должна быть больше нуля")
         self.__balance -= amount
         print('Деньги успешно сняты')
+        
+while True:
+    name = input('Введите имя: ')
+    if name:
+        break
+    else:
+        print('Имя не может быть пустым')
+
+acc = BankAccount(name)
+print(f'Владелец: {acc.owner}')
+
+print(f'Баланс: {acc.balance}')
+print('\n1. Пополнить счет')
+print('2. Снять деньги со счета')
+print('3. Выход')
+num = int(input('Выберите действие от 1 до 3: '))
