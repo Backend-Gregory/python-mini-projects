@@ -16,3 +16,15 @@ class Circle(Shape):
     
     def info(self):
         return 'Круг'
+    
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def area(self):
+        res = self.width * self.height
+        return res
+    
+    def info():
+        return 'Прямоугольник'
