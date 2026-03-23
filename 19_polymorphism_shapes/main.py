@@ -40,3 +40,6 @@ class Triangle(Shape):
     
     def info(self):
         return 'Треугольник'
+
+def print_area(obj):
+    print(f'{obj.info()}: площадь: {obj.area()}')
