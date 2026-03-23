@@ -28,3 +28,15 @@ class Rectangle(Shape):
     
     def info():
         return 'Прямоугольник'
+    
+class Triangle(Shape):
+    def __init__(self, base, height):
+        self.base = base
+        self.height = height
+    
+    def area(self):
+        res = 0.5 * self.base * self.height
+        return res
+    
+    def info(self):
+        return 'Треугольник'
