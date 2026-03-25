@@ -61,6 +61,7 @@ while True:
                 break
         else:
             stock.append(obj)
+        print('✅ Товар добавлен')
 
     elif num == 2:
         if not stock:
