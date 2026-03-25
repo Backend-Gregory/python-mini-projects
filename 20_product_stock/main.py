@@ -11,3 +11,12 @@ class Product:
         if not isinstance(other, Product):
             return NotImplemented
         return self.name == other.name
+    
+    def __add__(self, other):
+        if not isinstance(other, Product):
+            return NotImplemented
+        if self.name == other.name:
+            obj = Product(self.name, self.price, self.quantity + other.quantity)
+            return obj
+        else:
+            return None
