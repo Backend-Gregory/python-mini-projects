@@ -62,3 +62,6 @@ while True:
             continue
         for t in stock:
             print(t)
+    
+    else:
+        break
