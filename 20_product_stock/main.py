@@ -20,3 +20,9 @@ class Product:
             return obj
         else:
             return None
+        
+    def __len__(self):
+        return self.quantity
+    
+    def __bool__(self):
+        return self.quantity > 0
