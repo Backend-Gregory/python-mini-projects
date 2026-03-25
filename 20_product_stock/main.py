@@ -55,3 +55,10 @@ while True:
                 break
         else:
             stock.append(obj)
+
+    elif num == 2:
+        if not stock:
+            print('Склад пуст')
+            continue
+        for t in stock:
+            print(t)
