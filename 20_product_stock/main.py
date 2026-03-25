@@ -10,7 +10,7 @@ class Product:
     def __eq__(self, other):
         if not isinstance(other, Product):
             return NotImplemented
-        return self.name == other.name
+        return self.name == other.name and self.price == other.price
     
     def __add__(self, other):
         if not isinstance(other, Product):
@@ -29,9 +29,16 @@ class Product:
 
 stock = []
 
+def valid(text_value, text_valid, e=int):
+    while True:
+        try:
+            value = e(input(text_value))
+            return value
+        except ValueError:
+            print(text_valid)
+
 while True:
     print('1. Добавить товар')
     print('2. Показать все товары')
-    print('3. Объединить товары')
-    print('4. Выход')
+    print('3. Выход')
     num = int(input('Выберите действие: '))
