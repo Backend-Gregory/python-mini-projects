@@ -26,3 +26,12 @@ class Product:
     
     def __bool__(self):
         return self.quantity > 0
+
+stock = []
+
+while True:
+    print('1. Добавить товар')
+    print('2. Показать все товары')
+    print('3. Объединить товары')
+    print('4. Выход')
+    num = int(input('Выберите действие: '))
