@@ -34,20 +34,26 @@ def valid(text_value, text_valid, e=int):
     while True:
         try:
             value = e(input(text_value))
-            return value
+            if value:
+                return value
+            else:
+                print(text_valid)
         except ValueError:
             print(text_valid)
 
 while True:
-    print('1. Добавить товар')
+    print('\n1. Добавить товар')
     print('2. Показать все товары')
     print('3. Выход')
-    num = int(input('Выберите действие: '))
+    num = valid('Выберите действие: ', 'Введите число')
+    if not (1 <= num <= 3):
+        print('Число должно быть от 1 до 3')
+        continue
 
     if num == 1:
         name = valid('Введите название товара: ', 'Название не может быть пустым', str)
         price = valid('Введите цену товара: ', 'Цена должна быть числом', float)
-        qty = valid('Введите количество товара: ', 'Количество должно быть числом', int)
+        qty = valid('Введите количество товара: ', 'Количество должно быть числом')
         obj = Product(name, price, qty)
         for i, existing in enumerate(stock):
             if existing == obj:
