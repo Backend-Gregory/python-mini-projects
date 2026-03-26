@@ -17,3 +17,15 @@ class User:
 
     def __str__(self):
         return f'{self.name}: {len(self.borrowed)} книг'
+    
+class Library:
+    def __init__(self):
+        self.books = []
+        self.users = []
+        self.loans = []
+    
+    def add_book(self, book):
+        self.books.append(book)
+
+    def add_users(self, user):
+        self.users.append(user)
