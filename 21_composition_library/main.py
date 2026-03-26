@@ -38,3 +38,20 @@ class Library:
     
     def show_users(self):
         return self.users
+    
+    def borrow_book(self, title_book, user_name):
+        user = next((user for user in self.users if user_name == user.name), None)
+        book = next((book for book in self.books if title_book == book.title), None)
+        if not user:
+            print("Пользователь не найден")
+            return
+        if not book:
+            print("Книга не найдена")
+            return
+        
+        for user in self.users:
+            if book in user.borrowed:
+                print(f'Книга {title_book} уже выдана')
+                return
+        user.borrow(book)
+        print(f'Книга выдана пользователю: {user.name}')
