@@ -39,9 +39,15 @@ class Library:
     def show_users(self):
         return self.users
     
+    def _find_user(self, name):
+        return next((u for u in self.users if u.name == name), None)
+
+    def _find_book(self, title):
+        return next((b for b in self.books if b.title == title), None)
+    
     def borrow_book(self, title_book, user_name):
-        user = next((user for user in self.users if user_name == user.name), None)
-        book = next((book for book in self.books if title_book == book.title), None)
+        user = self._find_user(user_name)
+        book = self._find_book(title_book)
         if not user:
             print("Пользователь не найден")
             return
@@ -55,3 +61,19 @@ class Library:
                 return
         user.borrow(book)
         print(f'Книга выдана пользователю: {user.name}')
+    
+    def return_book(self, title_book, user_name):
+        user = self._find_user(user_name)
+
+        if not user:
+            print("Пользователь не найден")
+            return
+        
+        book = next((book for book in user.borrowed if title_book == book.title), None)
+
+        if not book:
+            print("Книга не найдена")
+            return
+
+        user.borrowed.remove(book)
+        print('Книга сдана')
