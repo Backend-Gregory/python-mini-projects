@@ -22,10 +22,19 @@ class Library:
     def __init__(self):
         self.books = []
         self.users = []
-        self.loans = []
-    
+
     def add_book(self, book):
         self.books.append(book)
 
     def add_users(self, user):
         self.users.append(user)
+    
+    def show_loans(self):
+        res = [user.borrowed for user in self.users]
+        return res
+    
+    def show_books(self):
+        return self.books
+    
+    def show_users(self):
+        return self.users
