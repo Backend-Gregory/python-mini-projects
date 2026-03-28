@@ -102,3 +102,8 @@ while True:
         user = User(name)
         library.add_users(user)
         print('✅ Читатель добавлен')
+
+    elif num == 3:
+        name = input('Имя читателя: ')
+        title_book = input('Название книги: ')
+        library.borrow_book(title_book, name)
