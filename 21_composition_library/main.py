@@ -77,3 +77,15 @@ class Library:
 
         user.borrowed.remove(book)
         print('Книга сдана')
+
+library = Library()
+while True:
+    print('\n1. Добавить книгу')
+    print('2. Добавить читателя')
+    print('3. Выдать книгу')
+    print('4. Вернуть книгу')
+    print('5. Показать книги')
+    print('6. Показать читателей')
+    print('7. Показать выдачи')
+    print('8. Выход')
+    num = int(input('Выберите действие: '))
