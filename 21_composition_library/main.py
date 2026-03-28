@@ -96,3 +96,9 @@ while True:
         book = Book(title, author, year)
         library.add_book(book)
         print('✅ Книга добавлена')
+    
+    elif num == 2:
+        name = input('Введите свое имя: ')
+        user = User(name)
+        library.add_users(user)
+        print('✅ Читатель добавлен')
