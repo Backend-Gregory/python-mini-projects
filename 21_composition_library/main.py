@@ -133,3 +133,6 @@ while True:
                 books_list = [book.title for book in user.borrowed]
                 books_res = ', '.join(books_list)
                 print(f'{user.name}: {books_res}')
+    
+    else:
+        break
