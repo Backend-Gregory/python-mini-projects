@@ -89,3 +89,10 @@ while True:
     print('7. Показать выдачи')
     print('8. Выход')
     num = int(input('Выберите действие: '))
+    if num == 1:
+        title = input('Введите название книги: ')
+        author = input('Введите автора: ')
+        year = int(input('Введите год: '))
+        book = Book(title, author, year)
+        library.add_book(book)
+        print('✅ Книга добавлена')
