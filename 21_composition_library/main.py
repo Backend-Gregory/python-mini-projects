@@ -118,3 +118,9 @@ while True:
         print('Книги:')
         for book in books:
             print(book)
+    
+    elif num == 6:
+        users = library.show_users()
+        print('Пользователи:')
+        for user in users:
+            print(user)
