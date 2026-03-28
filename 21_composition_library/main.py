@@ -112,3 +112,9 @@ while True:
         name = input('Имя читателя: ')
         title_book = input('Название книги: ')
         library.return_book(title_book, name)
+    
+    elif num == 5:
+        books = library.show_books()
+        print('Книги:')
+        for book in books:
+            print(book)
