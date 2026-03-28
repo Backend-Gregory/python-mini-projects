@@ -107,3 +107,8 @@ while True:
         name = input('Имя читателя: ')
         title_book = input('Название книги: ')
         library.borrow_book(title_book, name)
+
+    elif num == 4:
+        name = input('Имя читателя: ')
+        title_book = input('Название книги: ')
+        library.return_book(title_book, name)
