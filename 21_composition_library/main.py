@@ -78,6 +78,17 @@ class Library:
         user.borrowed.remove(book)
         print('Книга сдана')
 
+def valid(text_value, text_valid, e=str):
+    while True:
+        try:
+            value = e(input(text_value))
+            if value:
+                return value
+            else:
+                print(text_valid)
+        except ValueError:
+            print(text_valid)
+
 library = Library()
 while True:
     print('\n1. Добавить книгу')
@@ -88,29 +99,32 @@ while True:
     print('6. Показать читателей')
     print('7. Показать выдачи')
     print('8. Выход')
-    num = int(input('Выберите действие: '))
+    num = valid('Выберите действие: ', 'Введите число', int)
+    if not (1 <= num <= 8):
+        print('Введите число от 1 до 8')
+        continue
     if num == 1:
-        title = input('Введите название книги: ')
-        author = input('Введите автора: ')
-        year = int(input('Введите год: '))
+        title = valid('Введите название книги: ', 'Название не может быть пустым')
+        author = valid('Введите автора: ', 'Автор не может быть пустым')
+        year = valid('Введите год: ', 'Год должен быть числом', int)
         book = Book(title, author, year)
         library.add_book(book)
         print('✅ Книга добавлена')
     
     elif num == 2:
-        name = input('Введите свое имя: ')
+        name = valid('Введите свое имя: ', 'Имя не может быть пустым')
         user = User(name)
         library.add_users(user)
         print('✅ Читатель добавлен')
 
     elif num == 3:
-        name = input('Имя читателя: ')
-        title_book = input('Название книги: ')
+        name = valid('Имя читателя: ', 'Имя не может быть пустым')
+        title_book = valid('Название книги: ', 'Название не может быть пустым')
         library.borrow_book(title_book, name)
 
     elif num == 4:
-        name = input('Имя читателя: ')
-        title_book = input('Название книги: ')
+        name = valid('Имя читателя: ', 'Имя не может быть пустым')
+        title_book = valid('Название книги: ', 'Название не может быть пустым')
         library.return_book(title_book, name)
     
     elif num == 5:
