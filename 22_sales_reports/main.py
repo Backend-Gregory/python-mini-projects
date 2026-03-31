@@ -31,6 +31,14 @@ def read_lines(filename):
             obj = Sale(date, product, category, amount)
             yield obj
 
+def filter_sales(sales, start, end, category):
+    for sale in sales:
+        if sale.date < start or sale.date > end:
+            continue
+        if category and sale.category != category:
+            continue
+        yield sale
+
 print('=' * LINE_WIDTH)
 print('УЧЁТ ПРОДАЖ')
 print('=' * LINE_WIDTH)
