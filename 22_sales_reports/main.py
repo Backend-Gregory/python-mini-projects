@@ -11,7 +11,18 @@ class Sale:
     
     def __str__(self):
         return f'{self.date.strftime("%Y-%m-%d")}|{self.product}|{self.amount}'
-    
+
+def get_date(prompt):
+    date_str = input(prompt)
+    if not date_str:
+        return datetime.now()
+    try:
+        res = datetime.strptime(date_str, "%Y-%m-%d")
+        return res
+    except ValueError:
+        print("Ошибка! Используйте формат ГГГГ-ММ-ДД (или Enter для сегодня)")
+        return get_date(prompt)
+
 print('=' * LINE_WIDTH)
 print('УЧЁТ ПРОДАЖ')
 print('=' * LINE_WIDTH)
