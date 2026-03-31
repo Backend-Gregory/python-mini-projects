@@ -47,3 +47,12 @@ print('\n1. Добавить продажу')
 print('2. Показать отчёт')
 print('3. Выход')
 num = int(input('Выберите действие (1-3): '))
+
+if num == 1:
+    date = get_date('Дата (ГГГГ-ММ-ДД):')
+    product = input('Товар: ').strip()
+    category = input('Категория: ').strip()
+    amount = float(input('Сумма: '))
+    with open(FILE, 'a', encoding='utf-8') as file:
+        file.write(f'{date}|{product}|{category}|{amount}\n')
+    print('✅ Продажа добавлена')
