@@ -27,7 +27,7 @@ def read_lines(filename):
     with open(filename, encoding='utf-8') as file:
         for sale in file:
             sale_list = sale.split('|')
-            date, product, category, amount = datetime.strptime(sale_list[0], '%Y-%m-%d'), sale_list[1], sale_list[2], sale_list[3]
+            date, product, category, amount = datetime.strptime(sale_list[0], '%Y-%m-%d'), sale_list[1], sale_list[2], float(sale_list[3].strip())
             obj = Sale(date, product, category, amount)
             yield obj
 
@@ -54,5 +54,18 @@ if num == 1:
     category = input('Категория: ').strip()
     amount = float(input('Сумма: '))
     with open(FILE, 'a', encoding='utf-8') as file:
-        file.write(f'{date}|{product}|{category}|{amount}\n')
+        file.write(f"{date.strftime('%Y-%m-%d')}|{product}|{category}|{amount}\n")
     print('✅ Продажа добавлена')
+
+elif num == 2:
+    start = get_date('Дата начала: ')
+    end = get_date('Дата конца: ')
+    category = input('Категория: ').strip()
+    total = 0
+    count = 0
+    for sale in filter_sales(read_lines(FILE), start, end, category):
+        print(sale)
+        count += 1
+        total += sale.amount
+    
+    print(f'Итого: {count} продаж, сумма: {total}₽')
