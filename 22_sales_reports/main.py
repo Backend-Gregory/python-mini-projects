@@ -42,30 +42,34 @@ def filter_sales(sales, start, end, category):
 print('=' * LINE_WIDTH)
 print('УЧЁТ ПРОДАЖ')
 print('=' * LINE_WIDTH)
+while True:
+    print('\n1. Добавить продажу')
+    print('2. Показать отчёт')
+    print('3. Выход')
+    num = int(input('Выберите действие (1-3): '))
 
-print('\n1. Добавить продажу')
-print('2. Показать отчёт')
-print('3. Выход')
-num = int(input('Выберите действие (1-3): '))
 
-if num == 1:
-    date = get_date('Дата (ГГГГ-ММ-ДД):')
-    product = input('Товар: ').strip()
-    category = input('Категория: ').strip()
-    amount = float(input('Сумма: '))
-    with open(FILE, 'a', encoding='utf-8') as file:
-        file.write(f"{date.strftime('%Y-%m-%d')}|{product}|{category}|{amount}\n")
-    print('✅ Продажа добавлена')
+    if num == 1:
+        date = get_date('Дата (ГГГГ-ММ-ДД):')
+        product = input('Товар: ').strip()
+        category = input('Категория: ').strip()
+        amount = float(input('Сумма: '))
+        with open(FILE, 'a', encoding='utf-8') as file:
+            file.write(f"{date.strftime('%Y-%m-%d')}|{product}|{category}|{amount}\n")
+        print('✅ Продажа добавлена')
 
-elif num == 2:
-    start = get_date('Дата начала: ')
-    end = get_date('Дата конца: ')
-    category = input('Категория: ').strip()
-    total = 0
-    count = 0
-    for sale in filter_sales(read_lines(FILE), start, end, category):
-        print(sale)
-        count += 1
-        total += sale.amount
+    elif num == 2:
+        start = get_date('Дата начала: ')
+        end = get_date('Дата конца: ')
+        category = input('Категория: ').strip()
+        total = 0
+        count = 0
+        for sale in filter_sales(read_lines(FILE), start, end, category):
+            print(sale)
+            count += 1
+            total += sale.amount
+        
+        print(f'Итого: {count} продаж, сумма: {total}₽')
     
-    print(f'Итого: {count} продаж, сумма: {total}₽')
+    else:
+        break
