@@ -23,6 +23,14 @@ def get_date(prompt):
         print("Ошибка! Используйте формат ГГГГ-ММ-ДД (или Enter для сегодня)")
         return get_date(prompt)
 
+def read_lines(filename):
+    with open(filename, encoding='utf-8') as file:
+        for sale in file:
+            sale_list = sale.split('|')
+            date, product, category, amount = datetime.strptime(sale_list[0], '%Y-%m-%d'), sale_list[1], sale_list[2], sale_list[3]
+            obj = Sale(date, product, category, amount)
+            yield obj
+
 print('=' * LINE_WIDTH)
 print('УЧЁТ ПРОДАЖ')
 print('=' * LINE_WIDTH)
