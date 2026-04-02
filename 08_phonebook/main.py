@@ -14,7 +14,7 @@ if os.path.exists(FILE):
 else:
     contacts = []
 
-def add_contact(contacts):
+def add_contact(contacts: list[dict]) -> None:
     name = input("Имя контакта: ")
     number = input("Номер контакта: ")
     if not name or not number:
@@ -34,7 +34,7 @@ def add_contact(contacts):
     except Exception as e:
         print(f"Неизвестная ошибка: {e}")
 
-def find_by_name_or_number(contacts, value, key):
+def find_by_name_or_number(contacts: list[dict], value: str, key: str) -> None:
     if contacts:
         found = False
         for ch in contacts:
@@ -46,7 +46,7 @@ def find_by_name_or_number(contacts, value, key):
     else:
         print("У вас нет ни одного контакта.")
 
-def print_contacts(contacts):
+def print_contacts(contacts: list[dict]) -> None:
     if contacts:
         print()
         for ch in contacts:
