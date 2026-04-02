@@ -1,23 +1,23 @@
 class BankAccount:
-    def __init__(self, owner):
+    def __init__(self, owner: str) -> None:
         self.__owner = owner
         self.__balance = 0
     
     @property
-    def balance(self):
+    def balance(self) -> float:
         return self.__balance
     
     @property
-    def owner(self):
+    def owner(self) -> str:
         return self.__owner
 
-    def deposit(self, amount):
+    def deposit(self, amount: int) -> None:
         if amount <= 0:
             raise ValueError("Сумма пополнения должна быть больше нуля")
         self.__balance += amount
         print('Деньги успешно внесены')
     
-    def withdraw(self, amount):
+    def withdraw(self, amount: int) -> None:
         if amount > self.__balance:
             raise ValueError('Недостаточно средств')
         if amount <= 0:
