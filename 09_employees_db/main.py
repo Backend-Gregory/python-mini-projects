@@ -3,11 +3,11 @@ import json
 
 FILE = "employees.json"
 
-def save():
+def save(employees: dict[int, dict]) -> None:
     with open(FILE, 'w', encoding='utf-8') as file:
         json.dump(employees, file, ensure_ascii=False, indent=2)
 
-def print_all(employees):
+def print_all(employees: dict[int, dict]) -> None:
     if not employees:
         print("Сотрудники не найдены")
         return
@@ -21,7 +21,7 @@ def print_all(employees):
         print(f'{emp_id}(id): {name} ({department}) - {salary}')
     print()
 
-def add_employees(employees):
+def add_employees(employees: dict[int, dict]) -> None:
     try:
         name = input("Имя сотрудника: ")
         department = input("Отдел сотрудника: ")
@@ -36,7 +36,7 @@ def add_employees(employees):
     employees[id] = {"name": name, "department": department, "salary": salary}
     print("Сотрудник сохранен")
 
-def remove_employee(employees):
+def remove_employee(employees: dict[int, dict]) -> None:
     try:
         id = int(input("Введите id сотрудника которого требуется удалить: "))
         if id in employees:
@@ -50,7 +50,7 @@ def remove_employee(employees):
         print("id должно быть числом")
         return
 
-def raise_salary_by_department(employees):
+def raise_salary_by_department(employees: dict[int, dict]) -> None:
     print("1. Повысить зарплату отделу")
     print("2. Понизить зарплату отделу")
     try:
@@ -79,7 +79,7 @@ def raise_salary_by_department(employees):
         print("Отдел не найден")
         return
 
-def fot_by_department(employees):
+def fot_by_department(employees: dict[int, dict]) -> None:
     department = input("ФОТ какого отдела вы хотите узнать: ")
     total = 0
     found = False
@@ -123,13 +123,13 @@ while True:
 
     if num == 1:
         add_employees(employees)
-        save()
+        save(employees)
     elif num == 2:
         remove_employee(employees)
-        save()
+        save(employees)
     elif num == 3:
         raise_salary_by_department(employees)
-        save()
+        save(employees)
     elif num == 4:
         fot_by_department(employees)
     elif num == 5:
