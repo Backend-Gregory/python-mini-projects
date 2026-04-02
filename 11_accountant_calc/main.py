@@ -1,6 +1,6 @@
 from decimal import Decimal, ROUND_HALF_UP as R, InvalidOperation, DivisionByZero
 
-def get_amount_and_calculate(percent_value, e="грязными"):
+def get_amount_and_calculate(percent_value: str, e: str="грязными") -> None:
     try:
         amount = Decimal(input(f"Введите зарплату ({e}): "))
         percent = Decimal(percent_value)
@@ -24,7 +24,7 @@ def get_amount_and_calculate(percent_value, e="грязными"):
     rounded = res.quantize(Decimal('0.01'), rounding=R)
     print(f"{rounded}₽")
 
-LINE_WIDTH = 45
+LINE_WIDTH: int = 45
 
 print('=' * LINE_WIDTH)
 print('БУХГАЛТЕРСКИЙ КАЛЬКУЛЯТОР')
