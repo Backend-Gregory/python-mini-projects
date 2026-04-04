@@ -1,5 +1,16 @@
 import json
 import os
+import logging
+
+logging.basicConfig(
+    filename='errors.log',
+    level=logging.ERROR,
+    format="%(asctime)s - %(levelname)s - %(message)s,",
+    encoding='utf-8'
+)
+
+class ContactNotFoundError(Exception):
+    pass
 
 LINE_WIDTH = 45
 FILE = "contacts.json"
@@ -27,32 +38,34 @@ def add_contact(contacts: list[dict]) -> None:
         with open(FILE, "w", encoding="utf-8") as f:
             json.dump(contacts, f, ensure_ascii=False, indent=2)
         print("Контакт сохранен")
-    except PermissionError:
+    except PermissionError as e:
         print("Ошибка: Нет прав на запись в файл")
+        logging.error(f'Ошибка записи в {FILE}: {e}')
     except OSError as e:
         print(f"Ошибка записи: {e}")
+        logging.error(f'Ошибка записи в {FILE}: {e}')
     except Exception as e:
         print(f"Неизвестная ошибка: {e}")
+        logging.error(f'Неизвестная ошибка: {e}')
 
 def find_by_name_or_number(contacts: list[dict], value: str, key: str) -> None:
-    if contacts:
-        found = False
-        for ch in contacts:
-            if ch[key].lower() == value.lower():
-                print(f"{ch['name']}: {ch['number']}")
-                found = True
-        if not found:
-            print('Контакт не найден.')
-    else:
-        print("У вас нет ни одного контакта.")
+    if not contacts:
+        raise ContactNotFoundError('Список контактов пуст')
+    
+    found = False
+    for ch in contacts:
+        if ch[key].lower() == value.lower():
+            print(f"{ch['name']}: {ch['number']}")
+            found = True
+    if not found:
+        raise ContactNotFoundError('Контакт не найден.')
 
 def print_contacts(contacts: list[dict]) -> None:
-    if contacts:
-        print()
-        for ch in contacts:
-            print(f"{ch['name']}: {ch['number']}")
-    else:
-        print("У вас нет ни одного контакта.")
+    if not contacts:
+        raise ContactNotFoundError("У вас нет ни одного контакта.")
+    print()
+    for ch in contacts:
+        print(f"{ch['name']}: {ch['number']}")
 
 print('=' * LINE_WIDTH)
 print('Телефонный справочник')
@@ -79,15 +92,23 @@ while True:
     elif num == 2:
         name = input("Введите имя: ")
         by = 'name'
-        find_by_name_or_number(contacts, name, by)
+        try:
+            find_by_name_or_number(contacts, name, by)
+        except ContactNotFoundError as e:
+            print(e)
 
     elif num == 3:
         number = input("Введите номер: ")
         by = 'number'
-        find_by_name_or_number(contacts, number, by)
+        try:
+            find_by_name_or_number(contacts, number, by)
+        except ContactNotFoundError as e:
+            print(e)
 
     elif num == 4:
-        print_contacts(contacts)
-    
+        try:
+            print_contacts(contacts)
+        except ContactNotFoundError as e:
+            print(e)
     elif num == 5:
         break
